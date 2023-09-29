@@ -9,11 +9,13 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "vitest"
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sass": "^1.66.1"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.4.2",
@@ -35,6 +37,13 @@
     "eslint-plugin-storybook": "^0.6.13",
     "prop-types": "^15.8.1",
     "storybook": "^7.4.2",
+    "husky": "^8.0.3",
     "vite": "^4.4.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm lint", 
+      "pre-push": "npm lint"
+    }
   }
 }
