@@ -1,0 +1,38 @@
+.button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    /* Estilos generales para el botón */
+  }
+  
+  .button--small {
+    font-size: 12px;
+    /* Estilos para botones pequeños */
+  }
+  
+  .button--medium {
+    font-size: 16px;
+    /* Estilos para botones medianos */
+  }
+  
+  .button--large {
+    font-size: 24px;
+    /* Estilos para botones grandes */
+  }
+  
+  .button--blue {
+    background-color: blue;
+    color: white;
+    /* Estilos para botones azules */
+  }
+  
+  .button--red {
+    background-color: red;
+    color: white;
+    /* Estilos para botones rojos */
+  }
+  
+  .button--green {
+    background-color: green;
+    color: white;
+    /* Estilos para botones verdes */

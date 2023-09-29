@@ -3,7 +3,7 @@ import { mergeConfig } from 'vite';
 export default {
   // Replace your-framework with the framework you are using (e.g., react-vite, vue3-vite)
   framework: '@storybook/react-vite',
-  stories: ['../src/**/*.mdx', '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   async viteFinal(config, { configType }) {
     if (configType === 'DEVELOPMENT') {
       // Your development configuration goes here
