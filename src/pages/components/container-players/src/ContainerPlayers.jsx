@@ -1,4 +1,3 @@
-import React from 'react'
 import '../style/desktop.scss'
 import OptionPlayer from '../../option-player/src/OptionPlayer'
 
