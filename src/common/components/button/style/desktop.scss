@@ -1,39 +1,61 @@
 .button {
-    padding: 10px 20px;
-    border: none;
+  padding: 10px 20px;
+  border: none;
+  flex-shrink: 0;
+
+  /* Modificador (modifier) para el tipo "large-yellow" */
+  &--large-yellow {
+    width: 410px;
+    height: 67px;
+    border-radius: 15px;  
+    background: #f2b137;
+    box-shadow: 0px -8px 0px 0px #cc8b13 inset;
     cursor: pointer;
-    /* Estilos generales para el botón */
+
+    &:hover {
+      background-color: $primary-color;
+      box-shadow: 0px -8px 0px 0px #cc8b13 inset;
+    }
   }
-  
-  .button--small {
-    font-size: 12px;
-    /* Estilos para botones pequeños */
+  &--large-blue {
+    width: 410px;
+    height: 67px;
+    border-radius: 15px;  
+    background:  #31c3bd;
+    box-shadow: 0px -8px 0px 0px #118c87 inset;
+    cursor: pointer;
+
+    &--large-blue:hover {
+      background: #65e9e4;
+      box-shadow: 0px -8px 0px 0px #118c87 inset;
+    }
   }
-  
-  .button--medium {
-    font-size: 16px;
-    /* Estilos para botones medianos */
+
+  &--small-yellow {
+    width: 226px;
+    height: 52px;
+    border-radius: 10px;
+    background: #f2b137;
+    box-shadow: 0px -4px 0px 0px #cc8b13 inset;
+    cursor: pointer;
+    &--small-yellow:hover {
+      background:  #ffc860;
+      box-shadow: 0px -8px 0px 0px #cc8b13 inset;
+    }
   }
-  
-  .button--large {
-    font-size: 24px;
-    /* Estilos para botones grandes */
+
+  // Estilos para botones pequeños azules
+  &--small-gray {
+    width: 226px;
+    height: 52px;
+    border-radius: 10px;
+    background: var(--Silver, #a8bfc9);
+    box-shadow: 0px -4px 0px 0px #6b8997 inset;
+    cursor: pointer;
+    // Estilos para botones pequeños azules
+    &--small-gray:hover {
+      background: var(--silver-hover, #dbe8ed);
+      box-shadow: 0px -4px 0px 0px #6b8997 inset;
+    }
   }
-  
-  .button--blue {
-    background-color: blue;
-    color: white;
-    /* Estilos para botones azules */
-  }
-  
-  .button--red {
-    background-color: red;
-    color: white;
-    /* Estilos para botones rojos */
-  }
-  
-  .button--green {
-    background-color: green;
-    color: white;
-  }
-    /* Estilos para botones verdes */
+}
