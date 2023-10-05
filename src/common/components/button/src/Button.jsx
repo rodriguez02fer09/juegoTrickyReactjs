@@ -1,13 +1,10 @@
-import '../style/desktop.scss'
+import '../style/desktop.scss';
 
-
-
-const Button = ({ label, size, color }) => {
-  const buttonClassName = `button ${size ? `button--${size}` : ''} ${color ? `button--${color}` : ''}`;
-
+const Button = ({ type, label}) => {
+  const buttonClassName = 'button' ;
   return (
-    <button className={buttonClassName}>
-      {label}
+    <button className={`${buttonClassName} ${buttonClassName}--${type}`} >
+    { label } 
     </button>
   );
 };
