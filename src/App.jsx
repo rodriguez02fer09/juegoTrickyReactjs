@@ -1,17 +1,9 @@
-import './App.css'
-
-
+import './App.scss'
+import Layout from './common/components/layout'
 function App() {
-  
   return (
     <>
-      
-      <h1>Vite + React</h1>
-      <div className="card">
-       
-       
-      </div>
-      
+      <Layout />
     </>
   )
 }

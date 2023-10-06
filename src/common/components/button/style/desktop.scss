@@ -7,25 +7,25 @@
   &--large-yellow {
     width: 410px;
     height: 67px;
-    border-radius: 15px;  
+    border-radius: 15px;
     background: #f2b137;
     box-shadow: 0px -8px 0px 0px #cc8b13 inset;
     cursor: pointer;
 
     &:hover {
-      background-color: $primary-color;
+      background-color: #ffc860;
       box-shadow: 0px -8px 0px 0px #cc8b13 inset;
     }
   }
   &--large-blue {
     width: 410px;
     height: 67px;
-    border-radius: 15px;  
-    background:  #31c3bd;
+    border-radius: 15px;
+    background: #31c3bd;
     box-shadow: 0px -8px 0px 0px #118c87 inset;
     cursor: pointer;
 
-    &--large-blue:hover {
+    &:hover {
       background: #65e9e4;
       box-shadow: 0px -8px 0px 0px #118c87 inset;
     }
@@ -38,8 +38,8 @@
     background: #f2b137;
     box-shadow: 0px -4px 0px 0px #cc8b13 inset;
     cursor: pointer;
-    &--small-yellow:hover {
-      background:  #ffc860;
+    &:hover {
+      background: #ffc860;
       box-shadow: 0px -8px 0px 0px #cc8b13 inset;
     }
   }
@@ -49,12 +49,12 @@
     width: 226px;
     height: 52px;
     border-radius: 10px;
-    background: var(--Silver, #a8bfc9);
+    background: #a8bfc9;
     box-shadow: 0px -4px 0px 0px #6b8997 inset;
     cursor: pointer;
     // Estilos para botones pequeños azules
-    &--small-gray:hover {
-      background: var(--silver-hover, #dbe8ed);
+    &:hover {
+      background: #dbe8ed;
       box-shadow: 0px -4px 0px 0px #6b8997 inset;
     }
   }
