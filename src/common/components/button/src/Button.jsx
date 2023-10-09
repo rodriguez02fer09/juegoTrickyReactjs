@@ -1,13 +1,13 @@
-import '../style/desktop.scss';
+import '../style/desktop.scss'
 
-const Button = ({ type, label}) => {
-  const buttonClassName = 'button' ;
+const Button = ({type, label}) => {
+  const buttonClassName = 'button'
+
   return (
-    <button className={`${buttonClassName} ${buttonClassName}--${type}`} >
-    { label } 
+    <button className={`${buttonClassName} ${buttonClassName}--${type}`}>
+      {label}
     </button>
-  );
-};
+  )
+}
 
-export default Button;
-
+export default Button
