@@ -1,0 +1,19 @@
+.select-player {
+  color: #a8bfc9;
+  font-size: 60px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: bold; /* Grosor de fuente en negrita */
+  &--active {
+    color: #1a2a33;
+  }
+  &__x {
+    &::before {
+      content: 'x';
+    }
+  }
+  &__o {
+    &::before {
+      content: 'o';
+    }
+  }
+}
