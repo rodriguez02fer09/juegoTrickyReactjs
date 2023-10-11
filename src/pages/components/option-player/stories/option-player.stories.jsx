@@ -1,4 +1,3 @@
-import React from 'react'
 import OptionPlayer from '../index' // Asegúrate de que la ruta sea correcta
 
 export default {
