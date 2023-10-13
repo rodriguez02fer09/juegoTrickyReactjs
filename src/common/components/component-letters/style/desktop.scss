@@ -1,0 +1,42 @@
+.component-letters {
+  margin: auto;
+
+  &--x {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__mediun {
+      font-size: 60px;
+    }
+    &__large {
+      font-size: 90px;
+    }
+
+    &::before {
+      content: 'x';
+      font-family: 'Outfit', sans-serif;
+      font-weight: bold; /* Grosor de fuente en negrita */
+      margin-bottom: 10px;
+      color: #31c3bd;
+    }
+  }
+  &--o {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__mediun {
+      font-size: 60px;
+    }
+    &__large {
+      font-size: 90px;
+    }
+
+    &::before {
+      content: 'o';
+      font-family: 'Outfit', sans-serif;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #f2b137;
+    }
+  }
+}
