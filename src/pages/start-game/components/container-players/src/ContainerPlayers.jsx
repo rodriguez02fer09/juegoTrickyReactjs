@@ -10,5 +10,4 @@ const ContainerPlayers = ({players}) => {
     </div>
   )
 }
-
 export default ContainerPlayers
