@@ -1,7 +1,6 @@
 .containPickPlayers {
   width: 460px;
   height: 205px;
-  flex-shrink: 0;
   border-radius: 15px;
   background: var(--Semi-Dark-Navy, #1f3641);
   box-shadow: 0px -8px 0px 0px #10212a inset;
@@ -9,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  margin-bottom: 42px;
 
   &__select {
     color: var(--Silver, #a8bfc9);

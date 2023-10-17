@@ -6,9 +6,11 @@ import Button from '../../../../common/components/button'
 const ContainSelectPlayer = ({players, type, label}) => {
   return (
     <div className="contain-select-player">
-      {players.map(({value}) => {
-        return <ComponentLetters value={value} size="mediun" />
-      })}
+      <div className="contain-letters">
+        {players.map(({value}) => {
+          return <ComponentLetters value={value} size="mediun" />
+        })}
+      </div>
       <ContainPickPlayers players={players} />
       <Button type={'large-yellow'} label={'NEW GAME (VS CPU)'} />
       <Button type={'large-blue'} label={'NEW GAME (VS PLAYER)'} />
