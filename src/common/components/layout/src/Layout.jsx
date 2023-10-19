@@ -1,4 +1,4 @@
-import '../../layout/style/desktop.scss'
+import '../index.scss'
 
 const Layout = ({children}) => {
   return <div className="layout">{children}</div>

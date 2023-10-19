@@ -1,8 +1,7 @@
 import '../style/desktop.scss'
 
-const ComponentLetters = ({player}) => {
-  const {value, size} = player
-  const defaultClass = `component-letters`
+const ComponentLetters = ({value, size}) => {
+  const defaultClass = `component-letter`
   return (
     <div
       className={`${defaultClass} ${defaultClass}--${value} ${defaultClass}--${value}__${size}`}
