@@ -1,19 +1,19 @@
 import '../styles/desktop.scss'
 import ItemBoard from '../../item-board/src/ItemBoard'
 
-const Board = () => {
+const Board = ({value, size}) => {
   const containClass = 'contain-board'
   return (
     <div className={`${containClass}`}>
-      <ItemBoard />
-      <ItemBoard />
-      <ItemBoard />
-      <ItemBoard />
-      <ItemBoard />
-      <ItemBoard />
-      <ItemBoard />
-      <ItemBoard />
-      <ItemBoard />
+      <ItemBoard value={value} size={size} />
+      <ItemBoard value={value} size={size} />
+      <ItemBoard value={value} size={size} />
+      <ItemBoard value={value} size={size} />
+      <ItemBoard value={value} size={size} />
+      <ItemBoard value={value} size={size} />
+      <ItemBoard value={value} size={size} />
+      <ItemBoard value={value} size={size} />
+      <ItemBoard value={value} size={size} />
     </div>
   )
 }

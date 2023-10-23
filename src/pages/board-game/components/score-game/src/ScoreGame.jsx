@@ -1,14 +1,13 @@
 import '../styles/desktop.scss'
 
-const ScoreGame = ({type, label}) => {
+const ScoreGame = ({color, playerScore, score}) => {
   const scoreClassName = 'score-game'
   return (
-    <div className={`${scoreClassName} `}>
-      <div className={`${scoreClassName} ${scoreClassName}--${type}`}>
-        <p></p>
-        <p></p>
-      </div>
+    <div className={`${scoreClassName} ${scoreClassName}--${color}`}>
+      <p>{playerScore}</p>
+      <p>{score}</p>
     </div>
   )
 }
+
 export default ScoreGame

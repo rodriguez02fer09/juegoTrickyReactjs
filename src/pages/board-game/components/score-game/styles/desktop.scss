@@ -1,0 +1,44 @@
+.score-game {
+  padding: 16px;
+  border: none;
+  flex-shrink: 0;
+  width: 140px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  &--blue {
+    background: var(--Light-Blue, #31c3bd);
+  }
+
+  &--gray {
+    background: var(--Silver, #a8bfc9);
+  }
+
+  &--yellow {
+    background: var(--Light-Yellow, #f2b137);
+  }
+
+  p {
+    color: var(--Dark-Navy, #1a2a33);
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    line-height: normal;
+    font-style: normal;
+
+    &:first-of-type {
+      font-family: Outfit;
+      font-size: 14px;
+
+      font-weight: 500;
+
+      letter-spacing: 0.875px;
+    }
+    &:nth-of-type(2) {
+      font-family: Outfit;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+  }
+}

@@ -9,8 +9,9 @@ const ContainGameBoard = ({
   player,
   players,
   playerTurn,
-  label,
-  type,
+  color,
+  text,
+  scorePlayers,
 }) => {
   return (
     <div className="contain-game-board">
@@ -21,8 +22,8 @@ const ContainGameBoard = ({
         players={players}
         playerTurn={playerTurn}
       />
-      <Board />
-      <ContainScoreGame type={type} laber={label} />
+      <Board value={value} size={size} />
+      <ContainScoreGame color={color} text={text} scorePlayers={scorePlayers} />
     </div>
   )
 }
