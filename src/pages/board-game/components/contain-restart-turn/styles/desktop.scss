@@ -1,0 +1,14 @@
+.contain-restart-turn {
+  width: 460px;
+  height: 52px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+
+  &__letters {
+    width: 70px;
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+  }
+}
