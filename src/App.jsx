@@ -15,7 +15,7 @@ function App() {
         <ContainGameBoard
           players={players}
           playerTurn="x"
-          value={'o'}
+          value={'x'}
           size={'large'}
         />
       </Layout>

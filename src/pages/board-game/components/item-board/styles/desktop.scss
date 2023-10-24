@@ -1,13 +1,10 @@
 .item-board {
   width: 140px;
   height: 140px;
-  flex-shrink: 0;
+
   border-radius: 15px;
   background: var(--Semi-Dark-Navy, #1f3641);
   box-shadow: 0px -8px 0px 0px #10212a inset;
-
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
-  align-items: center;
 }

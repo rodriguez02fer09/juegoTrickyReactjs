@@ -22,7 +22,7 @@ const ContainGameBoard = ({
         players={players}
         playerTurn={playerTurn}
       />
-      <Board value={value} size={size} />
+      <Board playerTurn={playerTurn} value={value} size={size} />
       <ContainScoreGame color={color} text={text} scorePlayers={scorePlayers} />
     </div>
   )
