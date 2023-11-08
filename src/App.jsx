@@ -12,7 +12,12 @@ function App() {
     <>
       <Layout>
         {/* <ContainSelectPlayer players={players} /> */}
-        <ContainGameBoard players={players} playerTurn="x" />
+        <ContainGameBoard
+          players={players}
+          playerTurn="x"
+          value={'x'}
+          size={'large'}
+        />
       </Layout>
     </>
   )
