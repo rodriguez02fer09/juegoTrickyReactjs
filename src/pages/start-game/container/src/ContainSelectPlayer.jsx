@@ -2,8 +2,12 @@ import '../index.scss'
 import ComponentLetters from '../../../../common/components/component-letters'
 import ContainPickPlayers from '../../components/contain-pick-players'
 import Button from '../../../../common/components/button'
+import {TrickyContext} from '../../../../Context'
+import {useContext} from 'react'
 
-const ContainSelectPlayer = ({players, type, label}) => {
+const ContainSelectPlayer = ({type, label}) => {
+  const {players} = useContext(TrickyContext)
+
   return (
     <div className="contain-select-player">
       <div className="contain-letters">
