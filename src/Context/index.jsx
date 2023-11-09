@@ -4,22 +4,36 @@ import {useState} from 'react'
 const TrickyContext = React.createContext()
 
 const TrickyProvider = ({children}) => {
-  const players = [
-    {value: 'x', selected: false},
-    {value: 'o', selected: true},
-  ]
-  const [value, setValue] = React.useState(players)
+  const [statePlayers, setStatePlayers] = React.useState([
+    {value: 'x', selected: true},
+    {value: 'o', selected: false},
+  ])
 
-  const selecPlayer = i => {
-    const updatedValue = [...value]
-    updatedValue[i].selected = !updatedValue[i].selected
-    setValue(updatedValue)
+  const selecPlayer = player => {
+    const indexPlayer = statePlayers.findIndex(p => p.value === player)
+    const updatedState = statePlayers.map(p => {
+      return {
+        ...p,
+        selected: false,
+      }
+    })
+
+    updatedState[indexPlayer].selected = true
+    setStatePlayers(updatedState)
+  }
+
+  const getPlayerSelect = () => {
+    return statePlayers.filter(p => {
+      return p.selected
+    })[0].value
   }
 
   return (
     <TrickyContext.Provider
       value={{
-        players,
+        statePlayers,
+        selecPlayer,
+        getPlayerSelect,
       }}
     >
       {children}
