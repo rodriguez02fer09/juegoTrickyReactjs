@@ -5,7 +5,7 @@ import {TrickyContext} from '../../../../../Context'
 
 const OptionPlayer = ({player}) => {
   const {selecPlayer} = useContext(TrickyContext)
-  const {value, selected} = player || {}
+  const {value, selected} = player || {} //asignación con valor predeterminado
   const defaultPlayer = `option-player`
   const selectedValue = selected ? 'active' : ''
 

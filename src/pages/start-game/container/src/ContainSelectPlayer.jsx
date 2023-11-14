@@ -8,11 +8,6 @@ import {useContext, useEffect} from 'react'
 
 const ContainSelectPlayer = ({type, label}) => {
   const {statePlayers, selecPlayer} = useContext(TrickyContext)
-  console.log('me llaman')
-
-  useEffect(() => {
-    selecPlayer('o')
-  }, [])
 
   return <SelectPlayer type={type} label={label} players={statePlayers} />
 }

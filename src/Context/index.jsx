@@ -1,13 +1,17 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useState} from 'react'
+import useLocalStorage from './useLocalStorage'
+import _default from '@storybook/addon-onboarding'
 
-const TrickyContext = React.createContext() //creamos el contexto
+const TrickyContext = React.createContext()
 
 const TrickyProvider = ({children}) => {
   const [statePlayers, setStatePlayers] = React.useState([
     {value: 'x', selected: true},
     {value: 'o', selected: false},
   ])
+
+  const {upDatePlayers, setUpDatePlayers} = useLocalStorage(statePlayers)
 
   const selecPlayer = player => {
     const indexPlayer = statePlayers.findIndex(p => p.value === player)
@@ -20,6 +24,7 @@ const TrickyProvider = ({children}) => {
 
     updatedState[indexPlayer].selected = true
     setStatePlayers(updatedState)
+    setUpDatePlayers(updatedState)
   }
 
   const getPlayerSelect = () => {
@@ -29,6 +34,11 @@ const TrickyProvider = ({children}) => {
       })[0]
       .value.toUpperCase()
   }
+  useEffect(() => {
+    if (upDatePlayers) {
+      setStatePlayers(upDatePlayers)
+    }
+  }, [])
 
   return (
     <TrickyContext.Provider
@@ -36,6 +46,7 @@ const TrickyProvider = ({children}) => {
         statePlayers,
         selecPlayer,
         getPlayerSelect,
+        setUpDatePlayers,
       }}
     >
       {children}

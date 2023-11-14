@@ -1,12 +1,15 @@
-import React,{useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 
+const useLocalStorage = initialPlayers => {
+  const storedPlayers =
+    JSON.parse(localStorage.getItem('players')) || initialPlayers
+  const [upDatePlayers, setUpDatePlayers] = useState(storedPlayers)
 
-const  useLocalStorage = ()=> {
+  useEffect(() => {
+    localStorage.setItem('players', JSON.stringify(upDatePlayers))
+  }, [upDatePlayers])
 
-  const [] = React.useState()
-
-return ()
-
+  return {upDatePlayers, setUpDatePlayers}
 }
 
-export defaul useLocalStorage
+export default useLocalStorage

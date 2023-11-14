@@ -4,7 +4,7 @@ import OptionPlayer from '../../option-player/src/OptionPlayer'
 const ContainerPlayers = ({players}) => {
   return (
     <div className="containerPlayers">
-      {players?.map(player => (
+      {players?.map((player, key) => (
         <OptionPlayer player={player} />
       ))}
     </div>
