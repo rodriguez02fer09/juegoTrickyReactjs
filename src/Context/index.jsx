@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 
-const TrickyContext = React.createContext()
+const TrickyContext = React.createContext() //creamos el contexto
 
 const TrickyProvider = ({children}) => {
   const [statePlayers, setStatePlayers] = React.useState([
@@ -23,9 +23,11 @@ const TrickyProvider = ({children}) => {
   }
 
   const getPlayerSelect = () => {
-    return statePlayers.filter(p => {
-      return p.selected
-    })[0].value
+    return statePlayers
+      .filter(p => {
+        return p.selected
+      })[0]
+      .value.toUpperCase()
   }
 
   return (
