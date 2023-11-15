@@ -10,8 +10,9 @@ const App = () => {
       <TrickyProvider>
         <Layout>
           <ContainSelectPlayer />
+
           {/* <ContainGameBoard
-x            playerTurn="x"
+            playerTurn="x"
             value={'x'}
             size={'large'}
           /> */}

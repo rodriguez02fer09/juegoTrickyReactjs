@@ -1,25 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useState} from 'react'
+import useLocalStorage from './useLocalStorage'
 
 const TrickyContext = React.createContext()
 
 const TrickyProvider = ({children}) => {
-  const players = [
-    {value: 'x', selected: false},
-    {value: 'o', selected: true},
-  ]
-  const [value, setValue] = React.useState(players)
-
-  const selecPlayer = i => {
-    const updatedValue = [...value]
-    updatedValue[i].selected = !updatedValue[i].selected
-    setValue(updatedValue)
-  }
+  const {statePlayers, getPlayerSelect, selecPlayer} = useLocalStorage([
+    {value: 'x', selected: true},
+    {value: 'o', selected: false},
+  ])
 
   return (
     <TrickyContext.Provider
       value={{
-        players,
+        statePlayers,
+        selecPlayer,
+        getPlayerSelect,
       }}
     >
       {children}
