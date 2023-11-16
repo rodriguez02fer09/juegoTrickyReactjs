@@ -30,7 +30,7 @@ const useLocalStorage = initialPlayers => {
     localStorage.setItem('players', JSON.stringify(statePlayers))
   }, [statePlayers])
 
-  return {statePlayers, getPlayerSelect, selecPlayer}
+  return {statePlayers, getPlayerSelect, selecPlayer} //los customhook retornan estados o funciones que cambian
 }
 
 export default useLocalStorage
