@@ -2,7 +2,7 @@
   width: 20px;
   height: 20px;
 
-  &__x {
+  &--x {
     width: 20px;
     height: 20px;
     display: flex;
@@ -10,7 +10,7 @@
     align-items: center;
 
     &::before {
-      content: 'x';
+      content: 'X';
       font-family: 'Outfit', sans-serif;
       font-weight: bold; /* Grosor de fuente en negrita */
       margin-bottom: 5px;
@@ -26,7 +26,7 @@
     align-items: center;
 
     &::before {
-      content: 'o';
+      content: 'O';
       font-family: 'Outfit', sans-serif;
       font-weight: bold;
       margin-bottom: 5px;

@@ -19,18 +19,16 @@ const useLocalStorage = initialPlayers => {
   }
 
   const getPlayerSelect = () => {
-    return statePlayers
-      .filter(p => {
-        return p.selected
-      })[0]
-      .value.toUpperCase()
+    return statePlayers.filter(p => {
+      return p.selected
+    })[0].value
   }
 
   useEffect(() => {
     localStorage.setItem('players', JSON.stringify(statePlayers))
   }, [statePlayers])
 
-  return {statePlayers, getPlayerSelect, selecPlayer}
+  return {statePlayers, getPlayerSelect, selecPlayer} //los customhook retornan estados o funciones que cambian
 }
 
 export default useLocalStorage
