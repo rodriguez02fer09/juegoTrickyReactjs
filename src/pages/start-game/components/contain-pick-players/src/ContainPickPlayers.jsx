@@ -12,7 +12,7 @@ const ContainPickPlayers = ({players}) => {
       <p className={`${defaultClass}__select`}>PICK PLAYER 1'S MARK</p>
       <ContainerPlayers players={players} />
       <p className={`${defaultClass}__start`}>
-        REMEMBER : {getPlayerSelect()} GOES FIRST
+        REMEMBER : {getPlayerSelect().toUpperCase()} GOES FIRST
       </p>
     </div>
   )

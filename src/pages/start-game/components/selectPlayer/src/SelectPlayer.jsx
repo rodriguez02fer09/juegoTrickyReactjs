@@ -2,8 +2,15 @@ import '../index.scss'
 import ComponentLetters from '../../../../../common/components/component-letters'
 import ContainPickPlayers from '../../contain-pick-players'
 import Button from '../../../../../common/components/button'
+import {Link} from 'react-router-dom'
 
-const SelectPlayer = ({type, label, players}) => {
+const SelectPlayer = ({
+  type,
+  label,
+  players,
+  onNewGameCpu,
+  onNewGamePlayer,
+}) => {
   return (
     <div className="contain-select-player">
       <div className="contain-letters">
@@ -29,8 +36,12 @@ const SelectPlayer = ({type, label, players}) => {
         </svg>
       </div>
       <ContainPickPlayers players={players} />
-      <Button type={'large-yellow'} label={'NEW GAME (VS CPU)'} />
-      <Button type={'large-blue'} label={'NEW GAME (VS PLAYER)'} />
+      <Link to="/gameBoard">
+        <Button type={'large-yellow'} label={'NEW GAME (VS CPU)'} />
+      </Link>
+      <Link to="/gameBoard">
+        <Button type={'large-blue'} label={'NEW GAME (VS PLAYER)'} />
+      </Link>
     </div>
   )
 }

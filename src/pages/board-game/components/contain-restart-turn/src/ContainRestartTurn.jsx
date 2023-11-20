@@ -4,10 +4,11 @@ import ButtonRestart from '../../button-restart/src/ButtonRestart'
 
 const ContainRestartTurn = ({value, size, player, players}) => {
   const defaulClass = 'contain-restart-turn'
+
   return (
     <div className={`${defaulClass}`}>
       <ButtonRestart />
-      <PlayerTurn value="x" />
+      <PlayerTurn value={value} />
       <div className={`${defaulClass} ${defaulClass}__letters`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

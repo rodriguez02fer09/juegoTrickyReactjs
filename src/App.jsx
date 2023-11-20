@@ -13,12 +13,10 @@ const App = () => {
       <Router>
         <Layout>
           <Routes>
-            <Route path="/selectPlayer" element={<ContainSelectPlayer />} />
+            <Route path="/" element={<ContainSelectPlayer />} />
             <Route
               path="/gameBoard"
-              element={
-                <ContainGameBoard playerTurn="x" value={'x'} size={'large'} />
-              }
+              element={<ContainGameBoard size={'large'} />}
             />
           </Routes>
         </Layout>

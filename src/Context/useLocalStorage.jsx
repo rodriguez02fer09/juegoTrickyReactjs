@@ -19,11 +19,9 @@ const useLocalStorage = initialPlayers => {
   }
 
   const getPlayerSelect = () => {
-    return statePlayers
-      .filter(p => {
-        return p.selected
-      })[0]
-      .value.toUpperCase()
+    return statePlayers.filter(p => {
+      return p.selected
+    })[0].value
   }
 
   useEffect(() => {
