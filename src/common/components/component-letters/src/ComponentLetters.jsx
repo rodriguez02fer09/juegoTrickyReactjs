@@ -1,6 +1,6 @@
 import '../style/desktop.scss'
 
-const ComponentLetters = ({value, size, playerTurn}) => {
+const ComponentLetters = ({value, playerTurn}) => {
   const defaultClass = `component-letter`
 
   return (
