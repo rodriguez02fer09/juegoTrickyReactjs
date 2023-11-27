@@ -1,8 +1,8 @@
 import '../styles/desktop.scss'
 
-const ButtonRestart = () => {
+const ButtonRestart = ({onClick}) => {
   return (
-    <button>
+    <button onClick={onClick} type="button">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="52"

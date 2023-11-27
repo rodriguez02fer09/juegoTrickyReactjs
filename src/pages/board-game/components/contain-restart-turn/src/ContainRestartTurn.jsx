@@ -2,12 +2,13 @@ import '../styles/desktop.scss'
 import PlayerTurn from '../../player-turn/src/PlayerTurn'
 import ButtonRestart from '../../button-restart/src/ButtonRestart'
 
-const ContainRestartTurn = ({value, size, player, players}) => {
+const ContainRestartTurn = ({value, handleReset}) => {
   const defaulClass = 'contain-restart-turn'
 
   return (
     <div className={`${defaulClass}`}>
-      <ButtonRestart />
+      <ButtonRestart onClick={handleReset} />
+
       <PlayerTurn value={value} />
       <div className={`${defaulClass} ${defaulClass}__letters`}>
         <svg
