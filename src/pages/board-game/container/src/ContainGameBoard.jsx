@@ -32,7 +32,11 @@ const ContainGameBoard = ({size}) => {
   const [board, setBoard] = useState(initialBoard)
   const [winner, setWinner] = useState(false)
   const {getPlayerSelect, selecPlayer} = useContext(TrickyContext)
+
   const currentPlayer = getPlayerSelect()
+
+  const [playerXWin, setPlayerXWin] = useState(0)
+  const [playerOWin, setPlayerOWin] = useState(0)
 
   const upDateBoard = i => {
     const newBoard = [...board]
@@ -40,23 +44,24 @@ const ContainGameBoard = ({size}) => {
     newBoard[i].selected = true
     setBoard(newBoard)
   }
-
+  const prevPlayerWins = winnerPlayer => {
+    if (currentPlayer === 'x') {
+      setPlayerXWin(state => state + 1)
+    }
+    if (currentPlayer === 'o') {
+      setPlayerOWin(state => state + 1)
+    }
+  }
   const winnerPlayer = () => {
-    if (winnerAllColumns(currentPlayer, board)) {
+    if (
+      winnerAllColumns(currentPlayer, board) ||
+      wionnerAllRows(currentPlayer, board) ||
+      winer(getRigthDiagonal(board), currentPlayer) ||
+      winer(getDiagonalLeft(board), currentPlayer)
+    ) {
       console.log('ganador')
       setWinner(true)
-    }
-    if (wionnerAllRows(currentPlayer, board)) {
-      console.log('ganador')
-      setWinner(true)
-    }
-    if (winer(getRigthDiagonal(board), currentPlayer)) {
-      console.log('ganador')
-      setWinner(true)
-    }
-    if (winer(getDiagonalLeft(board), currentPlayer)) {
-      console.log('ganador')
-      setWinner(true)
+      prevPlayerWins(currentPlayer)
     }
   }
 
@@ -90,7 +95,7 @@ const ContainGameBoard = ({size}) => {
       {winner && <Confetti />}
       <ContainRestartTurn value={currentPlayer} handleReset={handleReset} />
       <Board board={board} handleCellClick={handleCellClick} />
-      <ContainScoreGame />
+      <ContainScoreGame playerXWin={playerXWin} playerOWin={playerOWin} />
     </div>
   )
 }
