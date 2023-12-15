@@ -15,8 +15,17 @@ import {
   getDiagonalLeft,
 } from '../../../../utils/index'
 import Confetti from '../../../board-game/components/winnwr-confetti/index'
+import Modal from '../../../../common/components/modal/src/Modal'
+import ReportGame from '../../../../common/components/reportGame/src/ReportGame'
 
-const ContainGameBoard = ({size}) => {
+const ContainGameBoard = ({
+  type,
+  label,
+  textReport,
+  takeRound,
+  value,
+  playerTurn,
+}) => {
   const initialBoard = [
     {p: '0,0', value: '', index: '0', selected: false},
     {p: '0,1', value: '', index: '1', selected: false},
@@ -93,6 +102,20 @@ const ContainGameBoard = ({size}) => {
   return (
     <div className="contain-game-board">
       {winner && <Confetti />}
+
+      {winner && (
+        <Modal>
+          <ReportGame
+            takeRound="TAKES THE ROUND"
+            textReport="YOU WON!"
+            type={type}
+            label={label}
+            value={value}
+            playerTurn={playerTurn}
+          />
+        </Modal>
+      )}
+
       <ContainRestartTurn value={currentPlayer} handleReset={handleReset} />
       <Board board={board} handleCellClick={handleCellClick} />
       <ContainScoreGame playerXWin={playerXWin} playerOWin={playerOWin} />
