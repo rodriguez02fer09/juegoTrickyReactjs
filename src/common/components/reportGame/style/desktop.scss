@@ -1,35 +1,68 @@
 .contain-reportGame {
   width: 491px;
   height: 176px;
+
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  p {
-    color: var(--Silver, #a8bfc9);
-    text-align: center;
-    font-feature-settings: 'clig' off, 'liga' off;
 
-    font-family: Outfit;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
   &--letter-report {
-    p {
-      color: var(--Light-Blue, #31c3bd);
+    width: 95px;
+    height: 20px;
+
+    margin-bottom: 10px;
+
+    &__textReport {
+      color: var(--Silver, #a8bfc9);
+      text-align: center;
+      font-feature-settings: 'clig' off, 'liga' off;
+      /* Heading (Extra Small) */
+      font-family: Outfit;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  }
+  &--contain-textRound {
+    width: 491px;
+    height: 64px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 28px;
+
+    &__blue {
+      color: #31c3bd;
       font-feature-settings: 'clig' off, 'liga' off;
       /* Heading (Large) */
       font-family: Outfit;
-      font-size: 40px;
+      font-size: 34px;
       font-style: normal;
       font-weight: 700;
       line-height: normal;
       letter-spacing: 2.5px;
       text-transform: uppercase;
     }
+    &__yellow {
+      color: #f2b137;
+      font-feature-settings: 'clig' off, 'liga' off;
+      /* Heading (Large) */
+      font-family: Outfit;
+      font-size: 34px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+  }
+  &--contain-button {
+    margin-left: 70px;
   }
 }

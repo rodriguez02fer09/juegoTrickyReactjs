@@ -24,7 +24,7 @@ const ContainGameBoard = ({
   textReport,
   takeRound,
   value,
-  playerTurn,
+  onClick,
 }) => {
   const initialBoard = [
     {p: '0,0', value: '', index: '0', selected: false},
@@ -99,6 +99,13 @@ const ContainGameBoard = ({
     setWinner(false)
   }
 
+  const handleNextRound = () => {
+    debugger
+    setBoard(() => initialBoard)
+    setWinner(state => !state)
+    console.log('click')
+  }
+
   return (
     <div className="contain-game-board">
       {winner && <Confetti />}
@@ -106,12 +113,13 @@ const ContainGameBoard = ({
       {winner && (
         <Modal>
           <ReportGame
+            debugger
             takeRound="TAKES THE ROUND"
             textReport="YOU WON!"
             type={type}
             label={label}
-            value={value}
-            playerTurn={playerTurn}
+            value={currentPlayer}
+            onClick={handleNextRound}
           />
         </Modal>
       )}

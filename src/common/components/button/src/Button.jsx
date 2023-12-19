@@ -1,10 +1,13 @@
 import '../style/desktop.scss'
 
-const Button = ({type, label}) => {
+const Button = ({type, label, onClick}) => {
   const buttonClassName = 'button'
 
   return (
-    <button className={`${buttonClassName} ${buttonClassName}--${type}`}>
+    <button
+      onClick={onClick}
+      className={`${buttonClassName} ${buttonClassName}--${type}`}
+    >
       {label}
     </button>
   )
