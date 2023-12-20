@@ -14,7 +14,7 @@ const ComponentLetters = ({value, playerTurn}) => {
           fill="none"
         >
           <g filter="url(#filter0_i_0_2269)">
-            <rect width="140" height="140" rx="15" fill="#1F3641" />
+            <rect width="140" height="140" />
           </g>
           <path
             fill-rule="evenodd"
@@ -74,7 +74,7 @@ const ComponentLetters = ({value, playerTurn}) => {
           fill="none"
         >
           <g filter="url(#filter0_i_0_1850)">
-            <rect width="140" height="140" rx="15" fill="#1F3641" />
+            <rect width="140" height="140" />
           </g>
           <path
             fill-rule="evenodd"

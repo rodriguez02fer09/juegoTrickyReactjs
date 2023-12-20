@@ -1,7 +1,7 @@
 import '../styles/desktop.scss'
 import ItemBoard from '../../item-board/src/ItemBoard'
 
-const Board = ({playerTurn, board, handleCellClick}) => {
+const Board = ({board, handleCellClick}) => {
   const containClass = 'contain-board'
   return (
     <div className={`${containClass}`}>
