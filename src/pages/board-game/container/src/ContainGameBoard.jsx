@@ -39,8 +39,9 @@ const ContainGameBoard = ({
   ]
 
   const [board, setBoard] = useState(initialBoard)
-  const [winner, setWinner] = useState(false)
-  const {getPlayerSelect, selecPlayer} = useContext(TrickyContext)
+
+  const {getPlayerSelect, selecPlayer, winner, setWinner} =
+    useContext(TrickyContext)
 
   const currentPlayer = getPlayerSelect()
 
@@ -69,7 +70,7 @@ const ContainGameBoard = ({
       winer(getDiagonalLeft(board), currentPlayer)
     ) {
       console.log('ganador')
-      setWinner(true)
+      setWinner(() => true)
       prevPlayerWins(currentPlayer)
     }
   }
@@ -77,11 +78,14 @@ const ContainGameBoard = ({
   const swichPlayer = () => {
     if (currentPlayer === 'o') {
       selecPlayer('x')
+      console.log('jugadorx')
     }
     if (currentPlayer === 'x') {
       selecPlayer('o')
+      console.log('jugadoro')
     }
   }
+
   const handleCellClick = i => {
     if (winner) {
       return false
@@ -113,7 +117,6 @@ const ContainGameBoard = ({
       {winner && (
         <Modal>
           <ReportGame
-            debugger
             takeRound="TAKES THE ROUND"
             textReport="YOU WON!"
             type={type}

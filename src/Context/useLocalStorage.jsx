@@ -3,7 +3,9 @@ import React, {useState, useEffect} from 'react'
 const useLocalStorage = initialPlayers => {
   const storedPlayers =
     JSON.parse(localStorage.getItem('players')) || initialPlayers
+
   const [statePlayers, setStatePlayers] = useState(storedPlayers)
+  const [winner, setWinner] = useState(false)
 
   const selecPlayer = player => {
     const indexPlayer = statePlayers.findIndex(p => p.value === player)
@@ -25,10 +27,13 @@ const useLocalStorage = initialPlayers => {
   }
 
   useEffect(() => {
-    localStorage.setItem('players', JSON.stringify(statePlayers))
-  }, [statePlayers])
+    debugger
+    if (winner === false) {
+      localStorage.setItem('players', JSON.stringify(statePlayers))
+    }
+  }, [statePlayers, winner])
 
-  return {statePlayers, getPlayerSelect, selecPlayer} //los customhook retornan estados o funciones que cambian
+  return {statePlayers, getPlayerSelect, selecPlayer, winner, setWinner} //los customhook retornan estados o funciones que cambian
 }
 
 export default useLocalStorage

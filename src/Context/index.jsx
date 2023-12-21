@@ -5,10 +5,11 @@ import useLocalStorage from './useLocalStorage'
 const TrickyContext = React.createContext()
 
 const TrickyProvider = ({children}) => {
-  const {statePlayers, getPlayerSelect, selecPlayer} = useLocalStorage([
-    {value: 'x', selected: true},
-    {value: 'o', selected: false},
-  ])
+  const {statePlayers, getPlayerSelect, selecPlayer, winner, setWinner} =
+    useLocalStorage([
+      {value: 'x', selected: true},
+      {value: 'o', selected: false},
+    ])
 
   return (
     <TrickyContext.Provider
@@ -16,6 +17,8 @@ const TrickyProvider = ({children}) => {
         statePlayers,
         selecPlayer,
         getPlayerSelect,
+        winner,
+        setWinner,
       }}
     >
       {children}

@@ -9,6 +9,5 @@ ReactDOM.createRoot(
   //elemento donde se renderiza la aplicacion
   <React.StrictMode>
     <App />
-    //componente principal de la aplicacion
   </React.StrictMode>,
 )
