@@ -40,9 +40,8 @@ const ContainGameBoard = ({
 
   const [board, setBoard] = useState(initialBoard)
 
-  const {getPlayerSelect, selecPlayer, winner, setWinner} =
-    useContext(TrickyContext)
-
+  const {getPlayerSelect, selecPlayer} = useContext(TrickyContext)
+  const [winner, setWinner] = useState(false)
   const currentPlayer = getPlayerSelect()
 
   const [playerXWin, setPlayerXWin] = useState(0)
@@ -76,13 +75,13 @@ const ContainGameBoard = ({
   }
 
   const swichPlayer = () => {
-    if (currentPlayer === 'o') {
-      selecPlayer('x')
-      console.log('jugadorx')
-    }
-    if (currentPlayer === 'x') {
-      selecPlayer('o')
-      console.log('jugadoro')
+    if (!winner) {
+      // Verifica si NO hay un ganador
+      if (currentPlayer === 'o') {
+        selecPlayer('x')
+      } else if (currentPlayer === 'x') {
+        selecPlayer('o')
+      }
     }
   }
 
@@ -104,7 +103,6 @@ const ContainGameBoard = ({
   }
 
   const handleNextRound = () => {
-    debugger
     setBoard(() => initialBoard)
     setWinner(state => !state)
     console.log('click')
@@ -127,7 +125,10 @@ const ContainGameBoard = ({
         </Modal>
       )}
 
-      <ContainRestartTurn value={currentPlayer} handleReset={handleReset} />
+      <ContainRestartTurn
+        value={winner ? ('x' === currentPlayer ? 'o' : 'x') : currentPlayer}
+        handleReset={handleReset}
+      />
       <Board board={board} handleCellClick={handleCellClick} />
       <ContainScoreGame playerXWin={playerXWin} playerOWin={playerOWin} />
     </div>
