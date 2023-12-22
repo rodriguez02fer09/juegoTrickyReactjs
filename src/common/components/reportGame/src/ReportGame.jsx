@@ -3,6 +3,7 @@ import Button from '../../button/src/Button'
 import '../style/desktop.scss' // Importa los estilos
 import ComponentLetters from '../../component-letters/src/ComponentLetters'
 import {Link} from 'react-router-dom'
+import LetterTurn from '../../../../pages/board-game/components/letter-turn/src/LetterTurn'
 
 const ReportGame = ({textReport, takeRound, type, label, value, onClick}) => {
   const defaultReport = 'contain-reportGame'

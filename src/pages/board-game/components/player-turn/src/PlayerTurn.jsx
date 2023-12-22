@@ -1,5 +1,6 @@
 import '../styles/desktop.scss'
 import LetterTurn from '../../letter-turn/src/LetterTurn'
+//import ComponentLetters from '../../../../../common/components/component-letters/src/ComponentLetters'
 
 const PlayerTurn = ({value}) => {
   const playerTurnClassName = 'component-player-turn'

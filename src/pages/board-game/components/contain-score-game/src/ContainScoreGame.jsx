@@ -12,7 +12,7 @@ const ContainScoreGame = ({
   return (
     <div className={`${containScoreClass}`}>
       <ScoreGame color={'blue'} playerScore={'X (YOU)'} score={playerXWin} />
-      <ScoreGame color={'yellow'} playerScore={'TIES'} score={'0'} />
+      <ScoreGame color={'yellow'} playerScore={'TIES'} score={'8'} />
       <ScoreGame color={'gray'} playerScore={'O (CPU)'} score={playerOWin} />
     </div>
   )

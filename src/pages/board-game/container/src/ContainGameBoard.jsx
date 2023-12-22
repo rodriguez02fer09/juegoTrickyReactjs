@@ -39,9 +39,9 @@ const ContainGameBoard = ({
   ]
 
   const [board, setBoard] = useState(initialBoard)
-  const [winner, setWinner] = useState(false)
-  const {getPlayerSelect, selecPlayer} = useContext(TrickyContext)
 
+  const {getPlayerSelect, selecPlayer} = useContext(TrickyContext)
+  const [winner, setWinner] = useState(false)
   const currentPlayer = getPlayerSelect()
 
   const [playerXWin, setPlayerXWin] = useState(0)
@@ -69,19 +69,22 @@ const ContainGameBoard = ({
       winer(getDiagonalLeft(board), currentPlayer)
     ) {
       console.log('ganador')
-      setWinner(true)
+      setWinner(() => true)
       prevPlayerWins(currentPlayer)
     }
   }
 
   const swichPlayer = () => {
-    if (currentPlayer === 'o') {
-      selecPlayer('x')
-    }
-    if (currentPlayer === 'x') {
-      selecPlayer('o')
+    if (!winner) {
+      // Verifica si NO hay un ganador
+      if (currentPlayer === 'o') {
+        selecPlayer('x')
+      } else if (currentPlayer === 'x') {
+        selecPlayer('o')
+      }
     }
   }
+
   const handleCellClick = i => {
     if (winner) {
       return false
@@ -100,7 +103,6 @@ const ContainGameBoard = ({
   }
 
   const handleNextRound = () => {
-    debugger
     setBoard(() => initialBoard)
     setWinner(state => !state)
     console.log('click')
@@ -113,7 +115,6 @@ const ContainGameBoard = ({
       {winner && (
         <Modal>
           <ReportGame
-            debugger
             takeRound="TAKES THE ROUND"
             textReport="YOU WON!"
             type={type}
@@ -124,7 +125,10 @@ const ContainGameBoard = ({
         </Modal>
       )}
 
-      <ContainRestartTurn value={currentPlayer} handleReset={handleReset} />
+      <ContainRestartTurn
+        value={winner ? ('x' === currentPlayer ? 'o' : 'x') : currentPlayer}
+        handleReset={handleReset}
+      />
       <Board board={board} handleCellClick={handleCellClick} />
       <ContainScoreGame playerXWin={playerXWin} playerOWin={playerOWin} />
     </div>

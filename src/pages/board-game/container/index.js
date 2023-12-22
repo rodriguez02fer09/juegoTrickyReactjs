@@ -1,2 +1,2 @@
-import ContainGameBoard from './src/ContainGameBoard'
+import ContainGameBoard from './src/ContainGameBoard.jsx'
 export default ContainGameBoard

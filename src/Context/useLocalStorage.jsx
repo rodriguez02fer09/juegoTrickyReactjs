@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 const useLocalStorage = initialPlayers => {
   const storedPlayers =
     JSON.parse(localStorage.getItem('players')) || initialPlayers
+
   const [statePlayers, setStatePlayers] = useState(storedPlayers)
 
   const selecPlayer = player => {
