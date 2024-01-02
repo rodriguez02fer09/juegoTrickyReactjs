@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '../../button/src/Button'
-import '../style/desktop.scss' // Importa los estilos'
+import '../style/desktop.scss' // Importa los estilos
 import {Link} from 'react-router-dom'
 
 const ModalReststart = ({textReststart, type, label, onClick}) => {
@@ -20,12 +20,14 @@ const ModalReststart = ({textReststart, type, label, onClick}) => {
         <Link to="/">
           <Button type={'small-gray'} label={'NO CANCEL'} />
         </Link>
+
         <Button
+          type={'small-yellow'}
+          label={'YES, RESTART'}
           onClick={() => {
+            console.log('click')
             onClick()
           }}
-          type={'small-yellow'}
-          label={'YES, RESTSTAR'}
         />
       </div>
     </div>

@@ -102,17 +102,20 @@ const ContainGameBoard = ({
 
   const handleReset = () => {
     setBoard(initialBoard)
-    setShowModal(true)
-    setWinner(false)
+    setShowModal(false)
     console.log('click')
   }
 
   const handleNextRound = () => {
-    setBoard(() => initialBoard)
-    setWinner(state => !state)
+    setBoard(initialBoard)
+    setWinner(false)
     console.log('click')
   }
-  debugger
+
+  const showResetModal = () => {
+    setShowModal(true)
+  }
+
   return (
     <div className="contain-game-board">
       {winner && <Confetti />}
@@ -128,12 +131,14 @@ const ContainGameBoard = ({
           />
         </Modal>
       )}
-      <Modal>
-        <ModalReststart type={type} label={label} onClick={handleReset} />
-      </Modal>
+      {showModal && (
+        <Modal>
+          <ModalReststart type={type} label={label} onClick={handleReset} />
+        </Modal>
+      )}
 
       <ContainRestartTurn
-        handleReset={handleReset}
+        handleReset={showResetModal}
         value={winner ? ('x' === currentPlayer ? 'o' : 'x') : currentPlayer}
       />
       <Board board={board} handleCellClick={handleCellClick} />
