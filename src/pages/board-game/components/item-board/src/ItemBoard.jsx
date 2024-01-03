@@ -9,7 +9,7 @@ const ItemBoard = ({
   selected,
 }) => {
   const defaultClass = 'item-board'
-
+  debugger
   return (
     <div
       className="item-board"

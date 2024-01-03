@@ -1,12 +1,17 @@
 import '../style/desktop.scss'
+import {useContext} from 'react'
+import {TrickyContext} from '../../../../Context'
 
-const ComponentLetters = ({value, playerTurn}) => {
+const ComponentLetters = ({value}) => {
+  const {getPlayerSelect} = useContext(TrickyContext)
+  const playerTurn = getPlayerSelect()
   const defaultClass = `component-letter`
-
+  debugger
   return (
     <>
       {value === 'x' && (
         <svg
+          className={`${defaultClass}`}
           xmlns="http://www.w3.org/2000/svg"
           width="140"
           height="140"
@@ -128,7 +133,9 @@ const ComponentLetters = ({value, playerTurn}) => {
       {value === '' && playerTurn === 'x' && (
         <>
           <svg
-            className={`${defaultClass} ${defaultClass}--empty`}
+            className={`${defaultClass} ${
+              value === '' ? `${defaultClass}--empty__x` : ''
+            }`}
             xmlns="http://www.w3.org/2000/svg"
             width="140"
             height="140"
@@ -197,7 +204,9 @@ const ComponentLetters = ({value, playerTurn}) => {
       {value === '' && playerTurn === 'o' && (
         <>
           <svg
-            className={`${defaultClass} ${defaultClass}--empty`}
+            className={`${defaultClass} ${
+              value === '' ? `${defaultClass}--empty__o` : ''
+            }`}
             xmlns="http://www.w3.org/2000/svg"
             width="140"
             height="140"
