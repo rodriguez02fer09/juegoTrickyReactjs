@@ -17,6 +17,7 @@ import {
 import Confetti from '../../../board-game/components/winnwr-confetti/index'
 import Modal from '../../../../common/components/modal/src/Modal'
 import ReportGame from '../../../../common/components/reportGame/src/ReportGame'
+import ModalReststart from '../../../../common/components/modal-reststart/src/ModalReststart'
 
 const ContainGameBoard = ({
   type,
@@ -46,6 +47,8 @@ const ContainGameBoard = ({
 
   const [playerXWin, setPlayerXWin] = useState(0)
   const [playerOWin, setPlayerOWin] = useState(0)
+
+  const [showModal, setShowModal] = useState(false)
 
   const upDateBoard = i => {
     const newBoard = [...board]
@@ -99,19 +102,23 @@ const ContainGameBoard = ({
 
   const handleReset = () => {
     setBoard(initialBoard)
-    setWinner(false)
+    setShowModal(false)
+    console.log('click')
   }
 
   const handleNextRound = () => {
-    setBoard(() => initialBoard)
-    setWinner(state => !state)
+    setBoard(initialBoard)
+    setWinner(false)
     console.log('click')
+  }
+
+  const showResetModal = () => {
+    setShowModal(true)
   }
 
   return (
     <div className="contain-game-board">
       {winner && <Confetti />}
-
       {winner && (
         <Modal>
           <ReportGame
@@ -124,10 +131,15 @@ const ContainGameBoard = ({
           />
         </Modal>
       )}
+      {showModal && (
+        <Modal>
+          <ModalReststart type={type} label={label} onClick={handleReset} />
+        </Modal>
+      )}
 
       <ContainRestartTurn
+        handleReset={showResetModal}
         value={winner ? ('x' === currentPlayer ? 'o' : 'x') : currentPlayer}
-        handleReset={handleReset}
       />
       <Board board={board} handleCellClick={handleCellClick} />
       <ContainScoreGame playerXWin={playerXWin} playerOWin={playerOWin} />

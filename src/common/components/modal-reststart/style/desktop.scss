@@ -1,0 +1,37 @@
+.contain-restatStart {
+  width: 491px;
+  height: 176px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &--letter-reststart {
+    width: 355px;
+    height: 50px;
+    margin-bottom: 10px;
+
+    &__textReststart {
+      color: var(--Silver, #a8bfc9);
+      text-align: center;
+      font-feature-settings: 'clig' off, 'liga' off;
+      /* Heading (Large) */
+      font-family: Outfit;
+      font-size: 38px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+  }
+
+  &--contain-button {
+    margin-top: 31px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
