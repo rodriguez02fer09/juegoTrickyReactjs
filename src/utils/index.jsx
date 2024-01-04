@@ -74,6 +74,7 @@ const wionnerAllRows = (currentPlayer, board) => {
     let rowPlayers = getByRow(i, board)
     if (winer(rowPlayers, currentPlayer)) {
       isWinnerRow = true
+      console.log(rowPlayers)
     }
   }
 

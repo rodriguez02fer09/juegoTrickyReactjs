@@ -28,15 +28,15 @@ const ContainGameBoard = ({
   onClick,
 }) => {
   const initialBoard = [
-    {p: '0,0', value: '', index: '0', selected: false},
-    {p: '0,1', value: '', index: '1', selected: false},
-    {p: '0,2', value: '', index: '2', selected: false},
-    {p: '1,0', value: '', index: '3', selected: false},
-    {p: '1,1', value: '', index: '4', selected: false},
-    {p: '1,2', value: '', index: '5', selected: false},
-    {p: '2,0', value: '', index: '6', selected: false},
-    {p: '2,1', value: '', index: '7', selected: false},
-    {p: '2,2', value: '', index: '8', selected: false},
+    {p: '0,0', value: '', index: '0', selected: false, winner: true},
+    {p: '0,1', value: '', index: '1', selected: false, winner: true},
+    {p: '0,2', value: '', index: '2', selected: false, winner: true},
+    {p: '1,0', value: '', index: '3', selected: false, winner: false},
+    {p: '1,1', value: '', index: '4', selected: false, winner: false},
+    {p: '1,2', value: '', index: '5', selected: false, winner: false},
+    {p: '2,0', value: '', index: '6', selected: false, winner: false},
+    {p: '2,1', value: '', index: '7', selected: false, winner: false},
+    {p: '2,2', value: '', index: '8', selected: false, winner: false},
   ]
 
   const [board, setBoard] = useState(initialBoard)
@@ -115,7 +115,7 @@ const ContainGameBoard = ({
   const showResetModal = () => {
     setShowModal(true)
   }
-
+  debugger
   return (
     <div className="contain-game-board">
       {winner && <Confetti />}

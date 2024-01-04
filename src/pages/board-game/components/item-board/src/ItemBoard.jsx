@@ -7,15 +7,16 @@ const ItemBoard = ({
   handleCellClick,
   posicionIndex,
   selected,
+  winner,
 }) => {
   const defaultClass = 'item-board'
-  debugger
+
   return (
     <div
       className="item-board"
       onClick={() => selected !== true && handleCellClick(posicionIndex)}
     >
-      <ComponentLetters playerTurn={playerTurn} value={value} />
+      <ComponentLetters value={value} winner={winner} />
     </div>
   )
 }
