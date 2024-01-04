@@ -13,6 +13,7 @@ import {
   wionnerAllRows,
   getRigthDiagonal,
   getDiagonalLeft,
+  winnerPosition,
 } from '../../../../utils/index'
 import Confetti from '../../../board-game/components/winnwr-confetti/index'
 import Modal from '../../../../common/components/modal/src/Modal'
@@ -28,9 +29,9 @@ const ContainGameBoard = ({
   onClick,
 }) => {
   const initialBoard = [
-    {p: '0,0', value: '', index: '0', selected: false, winner: true},
-    {p: '0,1', value: '', index: '1', selected: false, winner: true},
-    {p: '0,2', value: '', index: '2', selected: false, winner: true},
+    {p: '0,0', value: '', index: '0', selected: false, winner: false},
+    {p: '0,1', value: '', index: '1', selected: false, winner: false},
+    {p: '0,2', value: '', index: '2', selected: false, winner: false},
     {p: '1,0', value: '', index: '3', selected: false, winner: false},
     {p: '1,1', value: '', index: '4', selected: false, winner: false},
     {p: '1,2', value: '', index: '5', selected: false, winner: false},
@@ -65,13 +66,39 @@ const ContainGameBoard = ({
     }
   }
   const winnerPlayer = () => {
-    if (
-      winnerAllColumns(currentPlayer, board) ||
-      wionnerAllRows(currentPlayer, board) ||
-      winer(getRigthDiagonal(board), currentPlayer) ||
-      winer(getDiagonalLeft(board), currentPlayer)
-    ) {
-      console.log('ganador')
+    const {winner: currentWinnerAllColumns, positions: positionWinnerColumns} =
+      winnerAllColumns(currentPlayer, board)
+    const {winner: currentWionnerAllRows, positions: positionWinnerRows} =
+      wionnerAllRows(currentPlayer, board)
+    const {
+      winner: currentWinnerRigthDiagonal,
+      positions: positionWinnerDiagonalRigth,
+    } = winer(getRigthDiagonal(board), currentPlayer)
+
+    const {
+      winner: currentWinnerLeftDiagonal,
+      positions: positionWinnerDiagonalLeft,
+    } = winer(getDiagonalLeft(board), currentPlayer)
+    if (currentWinnerAllColumns) {
+      setBoard(winnerPosition(board, positionWinnerColumns))
+      setWinner(() => true)
+      prevPlayerWins(currentPlayer)
+    }
+
+    if (currentWionnerAllRows) {
+      setBoard(winnerPosition(board, positionWinnerRows))
+      setWinner(() => true)
+      prevPlayerWins(currentPlayer)
+    }
+
+    if (currentWinnerRigthDiagonal) {
+      setBoard(winnerPosition(board, positionWinnerDiagonalRigth))
+      setWinner(() => true)
+      prevPlayerWins(currentPlayer)
+    }
+
+    if (currentWinnerLeftDiagonal) {
+      setBoard(winnerPosition(board, positionWinnerDiagonalLeft))
       setWinner(() => true)
       prevPlayerWins(currentPlayer)
     }
@@ -115,7 +142,7 @@ const ContainGameBoard = ({
   const showResetModal = () => {
     setShowModal(true)
   }
-  debugger
+
   return (
     <div className="contain-game-board">
       {winner && <Confetti />}

@@ -19,11 +19,22 @@
 
 // CALCULOS DE COLUMNAS
 //esta funcion me trae el valor de cada una de las posiciones
+
+const winnerPosition = (board, positions) => {
+  for (let index = 0; index < positions.length; index++) {
+    board[positions[index].positions].winner = true
+  }
+  return board
+}
+
 const getByColumn = (colummn, board) => {
   const valor = []
 
   for (let i = colummn; i <= 6 + colummn; i += 3) {
-    valor.push(board[i].value)
+    valor.push({
+      value: board[i].value,
+      positions: board[i].index,
+    })
   }
   return valor
 }
@@ -37,19 +48,28 @@ const winnerAllColumns = (currentPlayer, board) => {
   let isWinner = false
   for (let i = 0; i <= 2; i++) {
     let columnPlayers = getByColumn(i, board)
-    if (winer(columnPlayers, currentPlayer)) {
-      isWinner = true
+    if (winer(columnPlayers, currentPlayer).winner) {
+      return {
+        winner: winer(columnPlayers, currentPlayer).winner,
+        positions: columnPlayers,
+      }
     }
   }
-  return isWinner
+
+  return {
+    winner: isWinner,
+    positions: [],
+  }
 }
 
 // winer CALCULA PARA TODAS LAS FUNCIONES
 const winer = (plays, currentPlayer) => {
-  plays
-  return plays.every(c => {
-    return c === currentPlayer
-  })
+  return {
+    winner: plays.every(c => {
+      return c.value === currentPlayer
+    }),
+    positions: plays,
+  }
 }
 
 // const winnerA = winnerAllColumns('X', board)
@@ -60,7 +80,10 @@ const winer = (plays, currentPlayer) => {
 const getByRow = (row, board) => {
   let valor = []
   for (let i = row; i <= 2 + row; i++) {
-    valor.push(board[i].value)
+    valor.push({
+      value: board[i].value,
+      positions: board[i].index,
+    })
   }
   return valor
 }
@@ -70,15 +93,19 @@ const getByRow = (row, board) => {
 const wionnerAllRows = (currentPlayer, board) => {
   let isWinnerRow = false
   for (let i = 0; i <= 6; i += 3) {
-    i
     let rowPlayers = getByRow(i, board)
-    if (winer(rowPlayers, currentPlayer)) {
-      isWinnerRow = true
-      console.log(rowPlayers)
+    if (winer(rowPlayers, currentPlayer).winner) {
+      return {
+        winner: winer(rowPlayers, currentPlayer).winner,
+        positions: rowPlayers,
+      }
     }
   }
 
-  return isWinnerRow
+  return {
+    winner: false,
+    positions: [],
+  }
 }
 
 // const winnerR = wionnerAllRows('X', board)
@@ -89,7 +116,10 @@ const wionnerAllRows = (currentPlayer, board) => {
 const getRigthDiagonal = board => {
   let valor = []
   for (let i = 2; i <= 6; i += 2) {
-    valor.push(board[i].value)
+    valor.push({
+      value: board[i].value,
+      positions: board[i].index,
+    })
   }
   return valor
 }
@@ -99,8 +129,10 @@ const getRigthDiagonal = board => {
 const getDiagonalLeft = board => {
   let valor = []
   for (let i = 0; i <= 8; i += 4) {
-    i
-    valor.push(board[i].value)
+    valor.push({
+      value: board[i].value,
+      positions: board[i].index,
+    })
   }
   return valor
 }
@@ -117,4 +149,5 @@ export {
   wionnerAllRows,
   getRigthDiagonal,
   getDiagonalLeft,
+  winnerPosition,
 }

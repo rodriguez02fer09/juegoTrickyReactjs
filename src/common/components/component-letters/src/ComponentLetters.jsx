@@ -6,7 +6,7 @@ const ComponentLetters = ({value, winner}) => {
   const {getPlayerSelect} = useContext(TrickyContext)
   const playerTurn = getPlayerSelect()
   const defaultClass = `component-letter`
-  debugger
+
   return (
     <>
       {value === 'x' && !winner && (
