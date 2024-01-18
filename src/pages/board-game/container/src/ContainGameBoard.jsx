@@ -13,11 +13,13 @@ import {
   wionnerAllRows,
   getRigthDiagonal,
   getDiagonalLeft,
+  winnerPosition,
 } from '../../../../utils/index'
 import Confetti from '../../../board-game/components/winnwr-confetti/index'
 import Modal from '../../../../common/components/modal/src/Modal'
 import ReportGame from '../../../../common/components/reportGame/src/ReportGame'
 import ModalReststart from '../../../../common/components/modal-reststart/src/ModalReststart'
+import ModalTied from '../../../../common/components/modal-tied/src/ModalTied'
 
 const ContainGameBoard = ({
   type,
@@ -28,15 +30,15 @@ const ContainGameBoard = ({
   onClick,
 }) => {
   const initialBoard = [
-    {p: '0,0', value: '', index: '0', selected: false},
-    {p: '0,1', value: '', index: '1', selected: false},
-    {p: '0,2', value: '', index: '2', selected: false},
-    {p: '1,0', value: '', index: '3', selected: false},
-    {p: '1,1', value: '', index: '4', selected: false},
-    {p: '1,2', value: '', index: '5', selected: false},
-    {p: '2,0', value: '', index: '6', selected: false},
-    {p: '2,1', value: '', index: '7', selected: false},
-    {p: '2,2', value: '', index: '8', selected: false},
+    {p: '0,0', value: '', index: '0', selected: false, winner: false},
+    {p: '0,1', value: '', index: '1', selected: false, winner: false},
+    {p: '0,2', value: '', index: '2', selected: false, winner: false},
+    {p: '1,0', value: '', index: '3', selected: false, winner: false},
+    {p: '1,1', value: '', index: '4', selected: false, winner: false},
+    {p: '1,2', value: '', index: '5', selected: false, winner: false},
+    {p: '2,0', value: '', index: '6', selected: false, winner: false},
+    {p: '2,1', value: '', index: '7', selected: false, winner: false},
+    {p: '2,2', value: '', index: '8', selected: false, winner: false},
   ]
 
   const [board, setBoard] = useState(initialBoard)
@@ -49,6 +51,7 @@ const ContainGameBoard = ({
   const [playerOWin, setPlayerOWin] = useState(0)
 
   const [showModal, setShowModal] = useState(false)
+  const [isTied, setIsTied] = useState(false)
 
   const upDateBoard = i => {
     const newBoard = [...board]
@@ -65,18 +68,52 @@ const ContainGameBoard = ({
     }
   }
   const winnerPlayer = () => {
-    if (
-      winnerAllColumns(currentPlayer, board) ||
-      wionnerAllRows(currentPlayer, board) ||
-      winer(getRigthDiagonal(board), currentPlayer) ||
-      winer(getDiagonalLeft(board), currentPlayer)
-    ) {
-      console.log('ganador')
+    const {winner: currentWinnerAllColumns, positions: positionWinnerColumns} =
+      winnerAllColumns(currentPlayer, board)
+    const {winner: currentWionnerAllRows, positions: positionWinnerRows} =
+      wionnerAllRows(currentPlayer, board)
+    const {
+      winner: currentWinnerRigthDiagonal,
+      positions: positionWinnerDiagonalRigth,
+    } = winer(getRigthDiagonal(board), currentPlayer)
+
+    const {
+      winner: currentWinnerLeftDiagonal,
+      positions: positionWinnerDiagonalLeft,
+    } = winer(getDiagonalLeft(board), currentPlayer)
+    if (currentWinnerAllColumns) {
+      setBoard(winnerPosition(board, positionWinnerColumns))
       setWinner(() => true)
       prevPlayerWins(currentPlayer)
     }
+
+    if (currentWionnerAllRows) {
+      setBoard(winnerPosition(board, positionWinnerRows))
+      setWinner(() => true)
+      prevPlayerWins(currentPlayer)
+    }
+
+    if (currentWinnerRigthDiagonal) {
+      setBoard(winnerPosition(board, positionWinnerDiagonalRigth))
+      setWinner(() => true)
+      prevPlayerWins(currentPlayer)
+    }
+
+    if (currentWinnerLeftDiagonal) {
+      setBoard(winnerPosition(board, positionWinnerDiagonalLeft))
+      setWinner(() => true)
+      prevPlayerWins(currentPlayer)
+    }
+
+    allTied()
   }
 
+  const allTied = () => {
+    const boardFull = board.every(b => b.value !== '')
+    if (boardFull && !winner) {
+      setIsTied(true)
+    }
+  }
   const swichPlayer = () => {
     if (!winner) {
       // Verifica si NO hay un ganador
@@ -103,12 +140,12 @@ const ContainGameBoard = ({
   const handleReset = () => {
     setBoard(initialBoard)
     setShowModal(false)
-    console.log('click')
   }
 
   const handleNextRound = () => {
     setBoard(initialBoard)
     setWinner(false)
+    setIsTied(false)
     console.log('click')
   }
 
@@ -134,6 +171,11 @@ const ContainGameBoard = ({
       {showModal && (
         <Modal>
           <ModalReststart type={type} label={label} onClick={handleReset} />
+        </Modal>
+      )}
+      {isTied && (
+        <Modal>
+          <ModalTied type={type} label={label} onClick={handleNextRound} />
         </Modal>
       )}
 
