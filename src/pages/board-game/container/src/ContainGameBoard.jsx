@@ -19,6 +19,7 @@ import Confetti from '../../../board-game/components/winnwr-confetti/index'
 import Modal from '../../../../common/components/modal/src/Modal'
 import ReportGame from '../../../../common/components/reportGame/src/ReportGame'
 import ModalReststart from '../../../../common/components/modal-reststart/src/ModalReststart'
+import ModalTied from '../../../../common/components/modal-tied/src/ModalTied'
 
 const ContainGameBoard = ({
   type,
@@ -50,6 +51,7 @@ const ContainGameBoard = ({
   const [playerOWin, setPlayerOWin] = useState(0)
 
   const [showModal, setShowModal] = useState(false)
+  const [isTied, setIsTied] = useState(false)
 
   const upDateBoard = i => {
     const newBoard = [...board]
@@ -102,8 +104,16 @@ const ContainGameBoard = ({
       setWinner(() => true)
       prevPlayerWins(currentPlayer)
     }
+
+    allTied()
   }
 
+  const allTied = () => {
+    const boardFull = board.every(b => b.value !== '')
+    if (boardFull && !winner) {
+      setIsTied(true)
+    }
+  }
   const swichPlayer = () => {
     if (!winner) {
       // Verifica si NO hay un ganador
@@ -130,12 +140,12 @@ const ContainGameBoard = ({
   const handleReset = () => {
     setBoard(initialBoard)
     setShowModal(false)
-    console.log('click')
   }
 
   const handleNextRound = () => {
     setBoard(initialBoard)
     setWinner(false)
+    setIsTied(false)
     console.log('click')
   }
 
@@ -161,6 +171,11 @@ const ContainGameBoard = ({
       {showModal && (
         <Modal>
           <ModalReststart type={type} label={label} onClick={handleReset} />
+        </Modal>
+      )}
+      {isTied && (
+        <Modal>
+          <ModalTied type={type} label={label} onClick={handleNextRound} />
         </Modal>
       )}
 
