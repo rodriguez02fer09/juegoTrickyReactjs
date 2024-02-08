@@ -7,23 +7,17 @@ export const selectedSlice = createSlice({
     {value: 'o', selected: false},
   ],
   reducers: {
-    statePlayers: (state, action) => {
-      return action.payload
-    },
     selecPlayer: (state, action) => {
-      const currentPlayerIndex = state.findIndex(player => player.selected)
-      state[currentPlayerIndex].selected = false
-      const newPlayerIndex = state.findIndex(
-        player => player.value === action.payload,
-      )
-      state[newPlayerIndex].selected = true
+      const newValue = action.payload
+      state.forEach(player => {
+        if (player.value === newValue) {
+          player.selected = true
+        } else {
+          player.selected = false
+        }
+      })
     },
-    getPlayerSelect: (state, action) => {
-      return action.payload
-      // return statePlayers.filter(p => {
-      //   return p.selected
-      // })[0].value
-    },
+    //getPlayerSelect: (state, action) => {},
   },
 })
 

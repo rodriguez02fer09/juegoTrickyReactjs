@@ -2,24 +2,25 @@ import '../index.scss'
 import SelectPlayer from '../../components/selectPlayer'
 import ComponentLetters from '../../../../common/components/component-letters'
 import {useSelector, useDispatch} from 'react-redux'
-import {statePlayers} from '../../../../redux/slice'
 
 import Button from '../../../../common/components/button'
 
 const ContainSelectPlayer = ({type, label}) => {
-  // const {statePlayers, selecPlayer} = useContext(TrickyContext)
-  const currentPlayer = useSelector(state => state.players)
+  const currentPlayer = useSelector(state => {
+    return state.players
+  })
+
   const dispatch = useDispatch()
 
   const handleSelect = playerValue => {
-    dispatch(selectPlayer(playerValue))
+    // dispatch(selectPlayer())
   }
 
   return (
     <SelectPlayer
       type={type}
       label={label}
-      players={statePlayers}
+      players={currentPlayer}
       onhandleChange={handleSelect}
     />
   )

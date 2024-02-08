@@ -1,16 +1,17 @@
 import '../style/desktop.scss'
 import PlayersSelect from '../../players-select/src/PlayersSelect'
-import {useContext} from 'react'
-import {TrickyContext} from '../../../../../Context'
+import {useDispatch} from 'react-redux'
+import {selecPlayer} from '../../../../../redux/slice'
 
 const OptionPlayer = ({player}) => {
-  const {selecPlayer} = useContext(TrickyContext)
+  const dispatch = useDispatch()
+
   const {value, selected} = player || {} //asignación con valor predeterminado
   const defaultPlayer = `option-player`
   const selectedValue = selected ? 'active' : ''
 
   const onClick = () => {
-    selecPlayer(value)
+    dispatch(selecPlayer(value))
   }
 
   return (

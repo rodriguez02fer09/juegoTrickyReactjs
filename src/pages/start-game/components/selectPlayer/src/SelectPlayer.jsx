@@ -4,14 +4,7 @@ import ContainPickPlayers from '../../contain-pick-players'
 import Button from '../../../../../common/components/button'
 import {Link} from 'react-router-dom'
 
-const SelectPlayer = ({
-  type,
-  label,
-  players,
-  onNewGameCpu,
-  onNewGamePlayer,
-  onhandleChange,
-}) => {
+const SelectPlayer = ({type, label, players}) => {
   return (
     <div className="contain-select-player">
       <div className="contain-letters">

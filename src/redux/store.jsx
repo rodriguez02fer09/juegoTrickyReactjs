@@ -3,6 +3,6 @@ import selectedReducer from './slice'
 
 export const store = configureStore({
   reducer: {
-    selectionPlayers: selectedReducer,
+    players: selectedReducer,
   },
 })

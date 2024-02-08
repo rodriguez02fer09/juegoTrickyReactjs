@@ -14,6 +14,7 @@ const TrickyProvider = ({children}) => {
     <TrickyContext.Provider
       value={{
         statePlayers,
+        //
         selecPlayer,
         getPlayerSelect,
       }}
