@@ -10,6 +10,7 @@ const SelectPlayer = ({
   players,
   onNewGameCpu,
   onNewGamePlayer,
+  onhandleChange,
 }) => {
   return (
     <div className="contain-select-player">
