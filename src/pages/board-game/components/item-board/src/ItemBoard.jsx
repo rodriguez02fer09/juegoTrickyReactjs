@@ -7,6 +7,7 @@ const ItemBoard = ({
   handleCellClick,
   posicionIndex,
   selected,
+  winner,
 }) => {
   const defaultClass = 'item-board'
 
@@ -15,7 +16,7 @@ const ItemBoard = ({
       className="item-board"
       onClick={() => selected !== true && handleCellClick(posicionIndex)}
     >
-      <ComponentLetters playerTurn={playerTurn} value={value} />
+      <ComponentLetters value={value} winner={winner} />
     </div>
   )
 }

@@ -2,7 +2,17 @@
   padding: 10px 20px;
   border: none;
   flex-shrink: 0;
-
+  color: var(--Dark-Navy, #1a2a33);
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  /* Heading (Extra Small) */
+  font-family: Outfit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   /* Modificador (modifier) para el tipo "large-yellow" */
   &--large-yellow {
     width: 410px;

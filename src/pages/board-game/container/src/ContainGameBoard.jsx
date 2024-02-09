@@ -11,10 +11,13 @@ import {
   wionnerAllRows,
   getRigthDiagonal,
   getDiagonalLeft,
+  winnerPosition,
 } from '../../../../utils/index'
 import Confetti from '../../../board-game/components/winnwr-confetti/index'
 import Modal from '../../../../common/components/modal/src/Modal'
 import ReportGame from '../../../../common/components/reportGame/src/ReportGame'
+import ModalReststart from '../../../../common/components/modal-reststart/src/ModalReststart'
+import ModalTied from '../../../../common/components/modal-tied/src/ModalTied'
 
 const ContainGameBoard = ({
   type,
@@ -25,15 +28,15 @@ const ContainGameBoard = ({
   onClick,
 }) => {
   const initialBoard = [
-    {p: '0,0', value: '', index: '0', selected: false},
-    {p: '0,1', value: '', index: '1', selected: false},
-    {p: '0,2', value: '', index: '2', selected: false},
-    {p: '1,0', value: '', index: '3', selected: false},
-    {p: '1,1', value: '', index: '4', selected: false},
-    {p: '1,2', value: '', index: '5', selected: false},
-    {p: '2,0', value: '', index: '6', selected: false},
-    {p: '2,1', value: '', index: '7', selected: false},
-    {p: '2,2', value: '', index: '8', selected: false},
+    {p: '0,0', value: '', index: '0', selected: false, winner: false},
+    {p: '0,1', value: '', index: '1', selected: false, winner: false},
+    {p: '0,2', value: '', index: '2', selected: false, winner: false},
+    {p: '1,0', value: '', index: '3', selected: false, winner: false},
+    {p: '1,1', value: '', index: '4', selected: false, winner: false},
+    {p: '1,2', value: '', index: '5', selected: false, winner: false},
+    {p: '2,0', value: '', index: '6', selected: false, winner: false},
+    {p: '2,1', value: '', index: '7', selected: false, winner: false},
+    {p: '2,2', value: '', index: '8', selected: false, winner: false},
   ]
 
   const [board, setBoard] = useState(initialBoard)
@@ -104,10 +107,13 @@ const ContainGameBoard = ({
   //   console.log('click')
   // }
 
+  const showResetModal = () => {
+    setShowModal(true)
+  }
+
   return (
     <div className="contain-game-board">
       {winner && <Confetti />}
-
       {winner && (
         <Modal>
           <ReportGame
@@ -118,6 +124,16 @@ const ContainGameBoard = ({
             value={currentPlayer}
             //onClick={handleNextRound}
           />
+        </Modal>
+      )}
+      {showModal && (
+        <Modal>
+          <ModalReststart type={type} label={label} onClick={handleReset} />
+        </Modal>
+      )}
+      {isTied && (
+        <Modal>
+          <ModalTied type={type} label={label} onClick={handleNextRound} />
         </Modal>
       )}
 

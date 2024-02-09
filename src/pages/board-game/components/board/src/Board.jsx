@@ -12,6 +12,7 @@ const Board = ({board, handleCellClick}) => {
           posicionIndex={move.index}
           posicion={move.posicion}
           selected={move.selected}
+          winner={move.winner}
           handleCellClick={handleCellClick}
         />
       ))}
