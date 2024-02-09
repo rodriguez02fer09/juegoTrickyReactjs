@@ -2,10 +2,13 @@ import {createSlice} from '@reduxjs/toolkit'
 
 export const selectedSlice = createSlice({
   name: 'players',
-  initialState: [
-    {value: 'x', selected: true},
-    {value: 'o', selected: false},
-  ],
+  initialState:
+    localStorage.getItem('players') !== null
+      ? JSON.parse(localStorage.getItem('players'))
+      : [
+          {value: 'x', selected: true},
+          {value: 'o', selected: false},
+        ],
   reducers: {
     selecPlayer: (state, action) => {
       const newValue = action.payload

@@ -6,8 +6,8 @@ const TrickyContext = React.createContext()
 
 const TrickyProvider = ({children}) => {
   const {statePlayers, getPlayerSelect, selecPlayer} = useLocalStorage([
-    {value: 'x', selected: true},
-    {value: 'o', selected: false},
+    {value: 'x', selected: false},
+    {value: 'o', selected: true},
   ])
 
   return (
