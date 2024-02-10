@@ -3,8 +3,6 @@ import {useState} from 'react'
 import ContainRestartTurn from '../../components/contain-restart-turn'
 import Board from '../../components/board/src/Board'
 import ContainScoreGame from '../../components/contain-score-game/src/ContainScoreGame'
-import {useContext} from 'react'
-import {TrickyContext} from '../../../../Context'
 import {
   getByColumn,
   winnerAllColumns,
@@ -43,111 +41,71 @@ const ContainGameBoard = ({
 
   const [board, setBoard] = useState(initialBoard)
 
-  const {getPlayerSelect, selecPlayer} = useContext(TrickyContext)
   const [winner, setWinner] = useState(false)
-  const currentPlayer = getPlayerSelect()
 
   const [playerXWin, setPlayerXWin] = useState(0)
   const [playerOWin, setPlayerOWin] = useState(0)
 
-  const [showModal, setShowModal] = useState(false)
-  const [isTied, setIsTied] = useState(false)
+  // const upDateBoard = i => {
+  //   const newBoard = [...board]
+  //   newBoard[i].value = currentPlayer
+  //   newBoard[i].selected = true
+  //   setBoard(newBoard)
+  // }
+  // const prevPlayerWins = winnerPlayer => {
+  //   if (currentPlayer === 'x') {
+  //     setPlayerXWin(state => state + 1)
+  //   }
+  //   if (currentPlayer === 'o') {
+  //     setPlayerOWin(state => state + 1)
+  //   }
+  // }
+  // const winnerPlayer = () => {
+  //   if (
+  //     winnerAllColumns(currentPlayer, board) ||
+  //     wionnerAllRows(currentPlayer, board) ||
+  //     winer(getRigthDiagonal(board), currentPlayer) ||
+  //     winer(getDiagonalLeft(board), currentPlayer)
+  //   ) {
+  //     console.log('ganador')
+  //     setWinner(() => true)
+  //     prevPlayerWins(currentPlayer)
+  //   }
+  // }
 
-  const upDateBoard = i => {
-    const newBoard = [...board]
-    newBoard[i].value = currentPlayer
-    newBoard[i].selected = true
-    setBoard(newBoard)
-  }
-  const prevPlayerWins = winnerPlayer => {
-    if (currentPlayer === 'x') {
-      setPlayerXWin(state => state + 1)
-    }
-    if (currentPlayer === 'o') {
-      setPlayerOWin(state => state + 1)
-    }
-  }
-  const winnerPlayer = () => {
-    const {winner: currentWinnerAllColumns, positions: positionWinnerColumns} =
-      winnerAllColumns(currentPlayer, board)
-    const {winner: currentWionnerAllRows, positions: positionWinnerRows} =
-      wionnerAllRows(currentPlayer, board)
-    const {
-      winner: currentWinnerRigthDiagonal,
-      positions: positionWinnerDiagonalRigth,
-    } = winer(getRigthDiagonal(board), currentPlayer)
+  // const swichPlayer = () => {
+  //   if (!winner) {
+  //     // Verifica si NO hay un ganador
+  //     if (currentPlayer === 'o') {
+  //       selecPlayer('x')
+  //     } else if (currentPlayer === 'x') {
+  //       selecPlayer('o')
+  //     }
+  //   }
+  // }
 
-    const {
-      winner: currentWinnerLeftDiagonal,
-      positions: positionWinnerDiagonalLeft,
-    } = winer(getDiagonalLeft(board), currentPlayer)
-    if (currentWinnerAllColumns) {
-      setBoard(winnerPosition(board, positionWinnerColumns))
-      setWinner(() => true)
-      prevPlayerWins(currentPlayer)
-    }
+  // const handleCellClick = i => {
+  //   if (winner) {
+  //     return false
+  //   }
+  //   //actualizar el tablero
+  //   upDateBoard(i)
+  //   //intercala los jugadores
+  //   swichPlayer()
+  //   //ganador
+  //   winnerPlayer()
+  // }
 
-    if (currentWionnerAllRows) {
-      setBoard(winnerPosition(board, positionWinnerRows))
-      setWinner(() => true)
-      prevPlayerWins(currentPlayer)
-    }
+  // const handleReset = () => {
+  //   setBoard(initialBoard)
+  //   setWinner(false)
+  // }
 
-    if (currentWinnerRigthDiagonal) {
-      setBoard(winnerPosition(board, positionWinnerDiagonalRigth))
-      setWinner(() => true)
-      prevPlayerWins(currentPlayer)
-    }
-
-    if (currentWinnerLeftDiagonal) {
-      setBoard(winnerPosition(board, positionWinnerDiagonalLeft))
-      setWinner(() => true)
-      prevPlayerWins(currentPlayer)
-    }
-
-    allTied()
-  }
-
-  const allTied = () => {
-    const boardFull = board.every(b => b.value !== '')
-    if (boardFull && !winner) {
-      setIsTied(true)
-    }
-  }
-  const swichPlayer = () => {
-    if (!winner) {
-      // Verifica si NO hay un ganador
-      if (currentPlayer === 'o') {
-        selecPlayer('x')
-      } else if (currentPlayer === 'x') {
-        selecPlayer('o')
-      }
-    }
-  }
-
-  const handleCellClick = i => {
-    if (winner) {
-      return false
-    }
-    //actualizar el tablero
-    upDateBoard(i)
-    //intercala los jugadores
-    swichPlayer()
-    //ganador
-    winnerPlayer()
-  }
-
-  const handleReset = () => {
-    setBoard(initialBoard)
-    setShowModal(false)
-  }
-
-  const handleNextRound = () => {
-    setBoard(initialBoard)
-    setWinner(false)
-    setIsTied(false)
-    console.log('click')
-  }
+  // const handleNextRound = () => {
+  //   setBoard(() => initialBoard)
+  //   setWinner(state => !state)
+  //   console.log('click')
+  // }
 
   const showResetModal = () => {
     setShowModal(true)
@@ -164,7 +122,7 @@ const ContainGameBoard = ({
             type={type}
             label={label}
             value={currentPlayer}
-            onClick={handleNextRound}
+            //onClick={handleNextRound}
           />
         </Modal>
       )}
@@ -180,10 +138,13 @@ const ContainGameBoard = ({
       )}
 
       <ContainRestartTurn
-        handleReset={showResetModal}
-        value={winner ? ('x' === currentPlayer ? 'o' : 'x') : currentPlayer}
+      //value={winner ? ('x' === currentPlayer ? 'o' : 'x') : currentPlayer}
+      //handleReset={handleReset}
       />
-      <Board board={board} handleCellClick={handleCellClick} />
+      <Board
+        board={board}
+        // handleCellClick={handleCellClick}
+      />
       <ContainScoreGame playerXWin={playerXWin} playerOWin={playerOWin} />
     </div>
   )

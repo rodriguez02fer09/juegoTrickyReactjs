@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {selectPlayer} from '../redux/slice'
 
 const useLocalStorage = initialPlayers => {
   const storedPlayers =
     JSON.parse(localStorage.getItem('players')) || initialPlayers
-
-  const [statePlayers, setStatePlayers] = useState(storedPlayers)
+  const selectPlayer = useSelector(state => state.players)
+  const dispatch = useDispatch()
+  //const [statePlayers, setStatePlayers] = useState(storedPlayers)
 
   const selecPlayer = player => {
     const indexPlayer = statePlayers.findIndex(p => p.value === player)
