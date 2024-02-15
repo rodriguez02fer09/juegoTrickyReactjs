@@ -2,7 +2,6 @@ import '../index.scss'
 import SelectPlayer from '../../components/selectPlayer'
 import ComponentLetters from '../../../../common/components/component-letters'
 import {useSelector, useDispatch} from 'react-redux'
-
 import Button from '../../../../common/components/button'
 
 const ContainSelectPlayer = ({type, label}) => {
@@ -12,18 +11,19 @@ const ContainSelectPlayer = ({type, label}) => {
 
   const dispatch = useDispatch()
 
-  // const handleSelect = playerValue => {
-  //   dispatch(selectPlayer(playerValue))
-  // }
+  const handleSelect = playerValue => {
+    dispatch(selectPlayer(playerValue))
+  }
 
   return (
     <SelectPlayer
       type={type}
       label={label}
-      //currentPlayer={currentPlayer}
-      //onhandleChange={handleSelect}
+      players={currentPlayer}
+      onhandleChange={handleSelect}
     />
   )
 }
 
 export default ContainSelectPlayer
+9
