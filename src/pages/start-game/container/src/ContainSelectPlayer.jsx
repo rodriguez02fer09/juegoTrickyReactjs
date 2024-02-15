@@ -2,6 +2,7 @@ import '../index.scss'
 import SelectPlayer from '../../components/selectPlayer'
 import ComponentLetters from '../../../../common/components/component-letters'
 import {useSelector, useDispatch} from 'react-redux'
+
 import Button from '../../../../common/components/button'
 
 const ContainSelectPlayer = ({type, label}) => {

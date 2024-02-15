@@ -3,8 +3,8 @@ import {useContext} from 'react'
 import {TrickyContext} from '../../../../Context'
 
 const ComponentLetters = ({value, winner}) => {
-  const {getPlayerSelect} = useContext(TrickyContext)
-  const playerTurn = getPlayerSelect()
+  // const {getPlayerSelect} = useContext(TrickyContext)
+  //const playerTurn = getPlayerSelect()
   const defaultClass = `component-letter`
 
   return (
@@ -130,7 +130,7 @@ const ComponentLetters = ({value, winner}) => {
           </defs>
         </svg>
       )}
-      {value === '' && playerTurn === 'x' && (
+      {/* {value === '' && playerTurn === 'x' && (
         <>
           <svg
             className={`${defaultClass} ${
@@ -383,7 +383,7 @@ const ComponentLetters = ({value, winner}) => {
             </filter>
           </defs>
         </svg>
-      )}
+      )} */}
     </>
   )
 }

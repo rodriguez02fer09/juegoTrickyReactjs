@@ -20,14 +20,8 @@ export const selectedSlice = createSlice({
         }
       })
     },
-    // getPlayerSelect: (state, action) => {
-    //   const {value} = action.payload
-    //   state.forEach(player => {
-    //     player.selected = player.value === value
-    //   })
-    // },
   },
 })
 
-export const {selecPlayer, getPlayerSelect} = selectedSlice.actions
+export const {selecPlayer} = selectedSlice.actions
 export default selectedSlice.reducer
