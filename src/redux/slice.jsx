@@ -20,10 +20,8 @@ export const selectedSlice = createSlice({
         }
       })
     },
-    //getPlayerSelect: (state, action) => {},
   },
 })
 
-export const {statePlayers, selecPlayer, getPlayerSelect} =
-  selectedSlice.actions
+export const {selecPlayer} = selectedSlice.actions
 export default selectedSlice.reducer

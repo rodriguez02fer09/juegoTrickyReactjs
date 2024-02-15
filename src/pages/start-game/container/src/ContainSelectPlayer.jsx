@@ -13,7 +13,7 @@ const ContainSelectPlayer = ({type, label}) => {
   const dispatch = useDispatch()
 
   const handleSelect = playerValue => {
-    // dispatch(selectPlayer())
+    dispatch(selectPlayer(playerValue))
   }
 
   return (
@@ -27,3 +27,4 @@ const ContainSelectPlayer = ({type, label}) => {
 }
 
 export default ContainSelectPlayer
+9

@@ -18,7 +18,7 @@ import Modal from '../../../../common/components/modal/src/Modal'
 import ReportGame from '../../../../common/components/reportGame/src/ReportGame'
 import ModalReststart from '../../../../common/components/modal-reststart/src/ModalReststart'
 import ModalTied from '../../../../common/components/modal-tied/src/ModalTied'
-
+import {useSelector} from 'react-redux'
 const ContainGameBoard = ({
   type,
   label,
@@ -38,6 +38,9 @@ const ContainGameBoard = ({
     {p: '2,1', value: '', index: '7', selected: false, winner: false},
     {p: '2,2', value: '', index: '8', selected: false, winner: false},
   ]
+  const currentPlayer = useSelector(state =>
+    state.players.find(player => player.selected),
+  )
 
   const [board, setBoard] = useState(initialBoard)
 
@@ -126,7 +129,7 @@ const ContainGameBoard = ({
           />
         </Modal>
       )}
-      {showModal && (
+      {/* {showModal && (
         <Modal>
           <ModalReststart type={type} label={label} onClick={handleReset} />
         </Modal>
@@ -135,11 +138,12 @@ const ContainGameBoard = ({
         <Modal>
           <ModalTied type={type} label={label} onClick={handleNextRound} />
         </Modal>
-      )}
+      )} */}
 
       <ContainRestartTurn
-      //value={winner ? ('x' === currentPlayer ? 'o' : 'x') : currentPlayer}
-      //handleReset={handleReset}
+        //value={winner ? ('x' === currentPlayer ? 'o' : 'x') : currentPlayer}
+        //handleReset={handleReset}
+        value={currentPlayer.value}
       />
       <Board
         board={board}
