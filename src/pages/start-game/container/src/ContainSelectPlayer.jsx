@@ -12,16 +12,16 @@ const ContainSelectPlayer = ({type, label}) => {
 
   const dispatch = useDispatch()
 
-  const handleSelect = playerValue => {
-    // dispatch(selectPlayer())
-  }
+  // const handleSelect = playerValue => {
+  //   dispatch(selectPlayer(playerValue))
+  // }
 
   return (
     <SelectPlayer
       type={type}
       label={label}
-      players={currentPlayer}
-      onhandleChange={handleSelect}
+      //currentPlayer={currentPlayer}
+      //onhandleChange={handleSelect}
     />
   )
 }
