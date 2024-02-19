@@ -1,7 +1,7 @@
 import '../style/desktop.scss'
 import PlayersSelect from '../../players-select/src/PlayersSelect'
 import {useDispatch} from 'react-redux'
-import {selecPlayer} from '../../../../../redux/slice'
+import {selecPlayer} from '../../../../../redux/players/slice'
 
 const OptionPlayer = ({player}) => {
   const dispatch = useDispatch()

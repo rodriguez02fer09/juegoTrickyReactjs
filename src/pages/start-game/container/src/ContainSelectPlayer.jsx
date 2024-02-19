@@ -27,4 +27,3 @@ const ContainSelectPlayer = ({type, label}) => {
 }
 
 export default ContainSelectPlayer
-9

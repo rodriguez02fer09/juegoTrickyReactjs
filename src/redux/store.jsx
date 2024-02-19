@@ -1,5 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit'
-import selectedReducer from './slice'
+import selectedReducer from './players/slice'
+import boardSlice from './board/slice'
 
 const reHydrateStore = () => {
   if (localStorage.getItem('players') !== null) {
@@ -18,6 +19,7 @@ const playersMiddleware = ({getState}) => {
 export const store = configureStore({
   reducer: {
     players: selectedReducer,
+    board: boardSlice,
   },
   preloadedState: reHydrateStore(),
   middleware: getDefaultMiddleware =>
