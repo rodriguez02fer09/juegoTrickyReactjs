@@ -1,3 +1,4 @@
+// src/pages/board-game/container/src/ContainGameBoard.jsx
 import React, {useState} from 'react'
 import '../styles/desktop.scss'
 import {useSelector} from 'react-redux'
@@ -17,7 +18,7 @@ export default function ContainGameBoard() {
   // Estado inicial del tablero de Redux
   const reduxBoard = useSelector(state => state.board)
 
-  // Estados locales: tablero, turno, ganador, empate, confeti y marcador
+  // Estados locales
   const [board, setBoard] = useState(reduxBoard)
   const [turn, setTurn] = useState('x') // X siempre inicia
   const [winnerSymbol, setWinnerSymbol] = useState(null)
@@ -25,35 +26,48 @@ export default function ContainGameBoard() {
   const [showConfetti, setShowConfetti] = useState(false)
   const [playerXWin, setPlayerXWin] = useState(0)
   const [playerOWin, setPlayerOWin] = useState(0)
+  const [tieCount, setTieCount] = useState(0)
 
-  // Reinicia todo para la siguiente ronda o inicio
+  // Reinicia todo para la siguiente ronda
   const handleReset = () => {
     setBoard(reduxBoard)
     setTurn('x')
     setWinnerSymbol(null)
     setIsTie(false)
     setShowConfetti(false)
+    setTieCount(0)
   }
 
-  // Maneja el click en una casilla
+  // Manejador de click en casilla
   const handleCellClick = idx => {
     if (winnerSymbol || isTie || board[idx].value) return
 
-    // 1) Marca la casilla con el símbolo del turno actual
+    // 1) Coloca el símbolo actual
     const newBoard = board.map(cell =>
       cell.index === idx ? {...cell, value: turn} : cell,
     )
     setBoard(newBoard)
 
-    // 2) Comprueba si hay ganador
+    // 2) Comprueba victoria
     const {winner, positions} = findWinningLine(turn, newBoard)
     if (winner) {
       setWinnerSymbol(turn)
       setShowConfetti(true)
       setBoard(prev => winnerPosition(prev, positions))
-      // Actualiza marcador
-      if (turn === 'x') setPlayerXWin(x => x + 1)
-      else setPlayerOWin(o => o + 1)
+      // Actualiza marcador y resetea si llega a 8
+      if (turn === 'x') {
+        setPlayerXWin(prev => {
+          const next = prev + 1
+          if (next >= 8) handleReset()
+          return next
+        })
+      } else {
+        setPlayerOWin(prev => {
+          const next = prev + 1
+          if (next >= 8) handleReset()
+          return next
+        })
+      }
       return
     }
 
@@ -61,10 +75,18 @@ export default function ContainGameBoard() {
     const full = newBoard.every(cell => cell.value !== '')
     if (full) {
       setIsTie(true)
+      setTieCount(prev => {
+        const next = prev + 1
+        if (next >= 8) {
+          handleReset()
+          return 0
+        }
+        return next
+      })
       return
     }
 
-    // 4) Cambia turno
+    // 4) Cambia de turno
     setTurn(prev => (prev === 'x' ? 'o' : 'x'))
   }
 
@@ -91,13 +113,13 @@ export default function ContainGameBoard() {
         </Modal>
       )}
 
-      {/* Controles de reinicio y turno/ganador */}
+      {/* Controles de reinicio y turno */}
       <ContainRestartTurn
         value={winnerSymbol ?? (isTie ? '' : turn)}
         handleReset={handleReset}
       />
 
-      {/* Tablero de juego */}
+      {/* Tablero interactivo */}
       <Board board={board} handleCellClick={handleCellClick} />
 
       {/* Marcador de puntuaciones */}
