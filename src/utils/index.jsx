@@ -1,153 +1,106 @@
-// -Problema encontrar un jugador
-// -el jugador escoge  X ó O e inicia el juego
-// -como pintar el tablero
-// -el jugador hace una jugada
+// src/utils/index.jsx
 
-// BOARD*/
-
-// var board = [
-//   (move1 = {p: '0,0', v: 'X', index: '0'}),
-//   (move2 = {p: '0,1', v: '', index: '1'}),
-//   (move3 = {p: '0,2', v: '', index: '2'}),
-//   (move4 = {p: '1,0', v: 'X', index: '3'}),
-//   (move5 = {p: '1,1', v: '', index: '4'}),
-//   (move6 = {p: '1,2', v: '', index: '5'}),
-//   (move7 = {p: '2,0', v: 'X', index: '6'}),
-//   (move8 = {p: '2,1', v: '', index: '7'}),
-//   (move9 = {p: '2,2', v: '', index: '8'}),
-// ]
-
-// CALCULOS DE COLUMNAS
-//esta funcion me trae el valor de cada una de las posiciones
-
-const winnerPosition = (board, positions) => {
-  for (let index = 0; index < positions.length; index++) {
-    board[positions[index].positions].winner = true
-  }
-  return board
+// Marca las posiciones ganadoras en el tablero
+export const winnerPosition = (board, positions) => {
+  const newBoard = board.map(cell => ({...cell}))
+  // positions ahora es un array de índices
+  positions.forEach(idx => {
+    newBoard[idx].winner = true
+  })
+  return newBoard
 }
 
-const getByColumn = (colummn, board) => {
-  const valor = []
-
-  for (let i = colummn; i <= 6 + colummn; i += 3) {
-    valor.push({
-      value: board[i].value,
-      positions: board[i].index,
-    })
+// Obtiene los valores de una columna dada (como objetos con value e index)
+export const getByColumn = (columnIndex, board) => {
+  const result = []
+  for (let i = columnIndex; i < board.length; i += 3) {
+    result.push({value: board[i].value, index: board[i].index})
   }
-  return valor
+  return result
 }
 
-//aqui recibe como parametro las jugadas que hay en el array y
-// el valor con el que esta jugando sea X ó O
-//Y ESTO ES LO QUE COMPÀRA SI SI ES GANADOR O  NO
-//otra forma de hacerlo
-
-const winnerAllColumns = (currentPlayer, board) => {
-  let isWinner = false
-  for (let i = 0; i <= 2; i++) {
-    let columnPlayers = getByColumn(i, board)
-    if (winer(columnPlayers, currentPlayer).winner) {
-      return {
-        winner: winer(columnPlayers, currentPlayer).winner,
-        positions: columnPlayers,
-      }
+// Comprueba todas las columnas en busca de ganador, devuelve posiciones como índices
+export const winnerAllColumns = (currentPlayer, board) => {
+  for (let c = 0; c < 3; c++) {
+    const column = getByColumn(c, board)
+    const check = winer(column, currentPlayer)
+    if (check.winner) {
+      return {winner: true, positions: column.map(p => p.index)}
     }
   }
-
-  return {
-    winner: isWinner,
-    positions: [],
-  }
+  return {winner: false, positions: []}
 }
 
-// winer CALCULA PARA TODAS LAS FUNCIONES
-const winer = (plays, currentPlayer) => {
-  return {
-    winner: plays.every(c => {
-      return c.value === currentPlayer
-    }),
-    positions: plays,
+// Comprueba si todos los plays tienen el mismo símbolo y devuelve posiciones como índices
+export const winer = (plays, currentPlayer) => ({
+  winner: plays.every(c => c.value === currentPlayer),
+  positions: plays.map(c => c.index),
+})
+
+// Obtiene los valores de una fila dada (como objetos con value e index)
+export const getByRow = (rowStartIndex, board) => {
+  const result = []
+  for (let i = rowStartIndex; i < rowStartIndex + 3; i++) {
+    result.push({value: board[i].value, index: board[i].index})
   }
+  return result
 }
 
-// const winnerA = winnerAllColumns('X', board)
-// winnerA
-
-//CALCULO DE FILAS
-
-const getByRow = (row, board) => {
-  let valor = []
-  for (let i = row; i <= 2 + row; i++) {
-    valor.push({
-      value: board[i].value,
-      positions: board[i].index,
-    })
-  }
-  return valor
-}
-
-//winer
-
-const wionnerAllRows = (currentPlayer, board) => {
-  let isWinnerRow = false
-  for (let i = 0; i <= 6; i += 3) {
-    let rowPlayers = getByRow(i, board)
-    if (winer(rowPlayers, currentPlayer).winner) {
-      return {
-        winner: winer(rowPlayers, currentPlayer).winner,
-        positions: rowPlayers,
-      }
+// Comprueba todas las filas en busca de ganador, devuelve posiciones como índices
+export const wionnerAllRows = (currentPlayer, board) => {
+  for (let r = 0; r < 3; r++) {
+    const row = getByRow(r * 3, board)
+    const check = winer(row, currentPlayer)
+    if (check.winner) {
+      return {winner: true, positions: row.map(p => p.index)}
     }
   }
-
-  return {
-    winner: false,
-    positions: [],
-  }
+  return {winner: false, positions: []}
 }
 
-// const winnerR = wionnerAllRows('X', board)
-// winnerR
+// Diagonal de izquierda a derecha
+// Diagonal de izquierda a derecha (de arriba-izquierda a abajo-derecha)
+export const getRigthDiagonal = board =>
+  [board[0], board[4], board[8]].map(cell => ({
+    value: cell.value,
+    index: cell.index,
+  }))
 
-//DIAGONAL DERECHA
+// Diagonal de derecha a izquierda
+// Diagonal de derecha a izquierda (de arriba-derecha a abajo-izquierda)
+export const getDiagonalLeft = board =>
+  [board[2], board[4], board[6]].map(cell => ({
+    value: cell.value,
+    index: cell.index,
+  }))
 
-const getRigthDiagonal = board => {
-  let valor = []
-  for (let i = 2; i <= 6; i += 2) {
-    valor.push({
-      value: board[i].value,
-      positions: board[i].index,
-    })
+// Función compuesta que revisa filas, columnas y diagonales
+// findWinningLine devuelve posiciones como índices numéricos
+export function findWinningLine(currentPlayer, board) {
+  // 1) Filas
+  const rowResult = wionnerAllRows(currentPlayer, board)
+  if (rowResult.winner) {
+    return rowResult
   }
-  return valor
-}
 
-//winer
-
-const getDiagonalLeft = board => {
-  let valor = []
-  for (let i = 0; i <= 8; i += 4) {
-    valor.push({
-      value: board[i].value,
-      positions: board[i].index,
-    })
+  // 2) Columnas
+  const colResult = winnerAllColumns(currentPlayer, board)
+  if (colResult.winner) {
+    return colResult
   }
-  return valor
-}
 
-// const winnerDiagonal = getDiagonalLeft(board)
-// winnerDiagonal
-// w = winer(winnerDiagonal, 'X')
+  // 3) Diagonales de izquierda a derecha
+  const rightDiag = winer(getRigthDiagonal(board), currentPlayer)
+  if (rightDiag.winner) {
+    return rightDiag
+  }
 
-export {
-  getByColumn,
-  winnerAllColumns,
-  winer,
-  getByRow,
-  wionnerAllRows,
-  getRigthDiagonal,
-  getDiagonalLeft,
-  winnerPosition,
+  // 4) Diagonales de derecha a izquierda
+  const leftDiag = winer(getDiagonalLeft(board), currentPlayer)
+  if (leftDiag.winner) {
+    return leftDiag
+  }
+
+  // 5) Si no hay ganador
+  return {winner: false, positions: []}
 }

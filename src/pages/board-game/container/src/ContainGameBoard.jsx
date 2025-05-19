@@ -1,141 +1,107 @@
+import React, {useState} from 'react'
 import '../styles/desktop.scss'
-import {useState} from 'react'
+import {useSelector} from 'react-redux'
+
 import ContainRestartTurn from '../../components/contain-restart-turn'
 import Board from '../../components/board/src/Board'
 import ContainScoreGame from '../../components/contain-score-game/src/ContainScoreGame'
-import {
-  getByColumn,
-  winnerAllColumns,
-  winer,
-  getByRow,
-  wionnerAllRows,
-  getRigthDiagonal,
-  getDiagonalLeft,
-  winnerPosition,
-} from '../../../../utils/index'
-import Confetti from '../../../board-game/components/winnwr-confetti/index'
+
+import {findWinningLine, winnerPosition} from '../../../../utils'
+
+import Confetti from '../../../board-game/components/winnwr-confetti'
 import Modal from '../../../../common/components/modal/src/Modal'
 import ReportGame from '../../../../common/components/reportGame/src/ReportGame'
-import ModalReststart from '../../../../common/components/modal-reststart/src/ModalReststart'
 import ModalTied from '../../../../common/components/modal-tied/src/ModalTied'
-import {useSelector} from 'react-redux'
-const ContainGameBoard = ({textReport, takeRound, value, onClick}) => {
-  const initialBoard = useSelector(state => state.board)
 
-  const currentPlayer = useSelector(state =>
-    state.players.find(player => player.selected),
-  )
+export default function ContainGameBoard() {
+  // Estado inicial del tablero de Redux
+  const reduxBoard = useSelector(state => state.board)
 
-  const [board, setBoard] = useState(initialBoard)
-
-  const [winner, setWinner] = useState(false)
-
+  // Estados locales: tablero, turno, ganador, empate, confeti y marcador
+  const [board, setBoard] = useState(reduxBoard)
+  const [turn, setTurn] = useState('x') // X siempre inicia
+  const [winnerSymbol, setWinnerSymbol] = useState(null)
+  const [isTie, setIsTie] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
   const [playerXWin, setPlayerXWin] = useState(0)
   const [playerOWin, setPlayerOWin] = useState(0)
 
-  // const upDateBoard = i => {
-  //   const newBoard = [...board]
-  //   newBoard[i].value = currentPlayer
-  //   newBoard[i].selected = true
-  //   setBoard(newBoard)
-  // }
-  // const prevPlayerWins = winnerPlayer => {
-  //   if (currentPlayer === 'x') {
-  //     setPlayerXWin(state => state + 1)
-  //   }
-  //   if (currentPlayer === 'o') {
-  //     setPlayerOWin(state => state + 1)
-  //   }
-  // }
-  // const winnerPlayer = () => {
-  //   if (
-  //     winnerAllColumns(currentPlayer, board) ||
-  //     wionnerAllRows(currentPlayer, board) ||
-  //     winer(getRigthDiagonal(board), currentPlayer) ||
-  //     winer(getDiagonalLeft(board), currentPlayer)
-  //   ) {
-  //     console.log('ganador')
-  //     setWinner(() => true)
-  //     prevPlayerWins(currentPlayer)
-  //   }
-  // }
+  // Reinicia todo para la siguiente ronda o inicio
+  const handleReset = () => {
+    setBoard(reduxBoard)
+    setTurn('x')
+    setWinnerSymbol(null)
+    setIsTie(false)
+    setShowConfetti(false)
+  }
 
-  // const swichPlayer = () => {
-  //   if (!winner) {
-  //     // Verifica si NO hay un ganador
-  //     if (currentPlayer === 'o') {
-  //       selecPlayer('x')
-  //     } else if (currentPlayer === 'x') {
-  //       selecPlayer('o')
-  //     }
-  //   }
-  // }
+  // Maneja el click en una casilla
+  const handleCellClick = idx => {
+    if (winnerSymbol || isTie || board[idx].value) return
 
-  // const handleCellClick = i => {
-  //   if (winner) {
-  //     return false
-  //   }
-  //   //actualizar el tablero
-  //   upDateBoard(i)
-  //   //intercala los jugadores
-  //   swichPlayer()
-  //   //ganador
-  //   winnerPlayer()
-  // }
+    // 1) Marca la casilla con el símbolo del turno actual
+    const newBoard = board.map(cell =>
+      cell.index === idx ? {...cell, value: turn} : cell,
+    )
+    setBoard(newBoard)
 
-  // const handleReset = () => {
-  //   setBoard(initialBoard)
-  //   setWinner(false)
-  // }
+    // 2) Comprueba si hay ganador
+    const {winner, positions} = findWinningLine(turn, newBoard)
+    if (winner) {
+      setWinnerSymbol(turn)
+      setShowConfetti(true)
+      setBoard(prev => winnerPosition(prev, positions))
+      // Actualiza marcador
+      if (turn === 'x') setPlayerXWin(x => x + 1)
+      else setPlayerOWin(o => o + 1)
+      return
+    }
 
-  // const handleNextRound = () => {
-  //   setBoard(() => initialBoard)
-  //   setWinner(state => !state)
-  //   console.log('click')
-  // }
+    // 3) Comprueba empate
+    const full = newBoard.every(cell => cell.value !== '')
+    if (full) {
+      setIsTie(true)
+      return
+    }
 
-  const showResetModal = () => {
-    setShowModal(true)
+    // 4) Cambia turno
+    setTurn(prev => (prev === 'x' ? 'o' : 'x'))
   }
 
   return (
     <div className="contain-game-board">
-      {winner && <Confetti />}
-      {winner && (
+      {showConfetti && <Confetti />}
+
+      {/* Modal de victoria */}
+      {winnerSymbol && (
         <Modal>
           <ReportGame
             takeRound="TAKES THE ROUND"
             textReport="YOU WON!"
-            type={type}
-            label={label}
-            value={currentPlayer}
-            //onClick={handleNextRound}
+            value={winnerSymbol}
+            onClick={handleReset}
           />
         </Modal>
       )}
-      {/* {showModal && (
+
+      {/* Modal de empate */}
+      {isTie && !winnerSymbol && (
         <Modal>
-          <ModalReststart type={type} label={label} onClick={handleReset} />
+          <ModalTied onClick={handleReset} />
         </Modal>
       )}
-      {isTied && (
-        <Modal>
-          <ModalTied type={type} label={label} onClick={handleNextRound} />
-        </Modal>
-      )} */}
 
+      {/* Controles de reinicio y turno/ganador */}
       <ContainRestartTurn
-        //value={winner ? ('x' === currentPlayer ? 'o' : 'x') : currentPlayer}
-        //handleReset={handleReset}
-        value={currentPlayer.value}
+        value={winnerSymbol ?? (isTie ? '' : turn)}
+        handleReset={handleReset}
       />
-      <Board
-        board={board}
-        // handleCellClick={handleCellClick}
-      />
+
+      {/* Tablero de juego */}
+      <Board board={board} handleCellClick={handleCellClick} />
+
+      {/* Marcador de puntuaciones */}
       <ContainScoreGame playerXWin={playerXWin} playerOWin={playerOWin} />
     </div>
   )
 }
-
-export default ContainGameBoard

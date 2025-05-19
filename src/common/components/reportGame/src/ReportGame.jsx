@@ -1,45 +1,30 @@
 import React from 'react'
-import Button from '../../button/src/Button'
-import '../style/desktop.scss' // Importa los estilos
-import ComponentLetters from '../../component-letters/src/ComponentLetters'
 import {Link} from 'react-router-dom'
-import LetterTurn from '../../../../pages/board-game/components/letter-turn/src/LetterTurn'
+import Button from '../../button/src/Button'
+import ComponentLetters from '../../component-letters/src/ComponentLetters'
+import '../style/desktop.scss'
 
-const ReportGame = ({textReport, takeRound, type, label, value, onClick}) => {
-  const defaultReport = 'contain-reportGame'
-  const letterReport = 'letter-report'
-  const containButton = 'contain-button'
-  const containRound = 'contain-textRound'
-  const takesRoundClass =
+const ReportGame = ({textReport, takeRound, value, onClick}) => {
+  const base = 'contain-reportGame'
+  const roundClass =
     value === 'x'
-      ? `${defaultReport}--${containRound}__yellow`
-      : `${defaultReport}--${containRound}__blue`
+      ? `${base}--contain-textRound__yellow`
+      : `${base}--contain-textRound__blue`
 
   return (
-    <div className={defaultReport}>
-      <div className={`${defaultReport}--${letterReport}`}>
-        <p className={`${defaultReport}--${letterReport}__textReport`}>
-          {textReport}
-        </p>
+    <div className={base}>
+      <div className={`${base}--letter-report`}>
+        <p className={`${base}--letter-report__textReport`}>{textReport}</p>
       </div>
-
-      <div className={`${defaultReport}--${containRound}`}>
-        <ComponentLetters value={value === 'x' ? 'o' : 'x'} />
-        <p className={`${takesRoundClass}`}>{takeRound}</p>
+      <div className={`${base}--contain-textRound`}>
+        <ComponentLetters value={value} />
+        <p className={roundClass}>{takeRound}</p>
       </div>
-
-      <div className={`${defaultReport}--${containButton}`}>
+      <div className={`${base}--contain-button`}>
         <Link to="/">
-          <Button type={'small-gray'} label={'QUIT'} />
+          <Button type="small-gray" label="QUIT" />
         </Link>
-        <Button
-          onClick={() => {
-            console.log('click')
-            onClick()
-          }}
-          type={'small-yellow'}
-          label={'NEXT ROUND'}
-        />
+        <Button onClick={onClick} type="small-yellow" label="NEXT ROUND" />
       </div>
     </div>
   )

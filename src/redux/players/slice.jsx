@@ -1,6 +1,7 @@
+// src/redux/players/slice.jsx
 import {createSlice} from '@reduxjs/toolkit'
 
-export const selectedSlice = createSlice({
+export const playersSlice = createSlice({
   name: 'players',
   initialState:
     localStorage.getItem('players') !== null
@@ -10,18 +11,23 @@ export const selectedSlice = createSlice({
           {value: 'o', selected: false},
         ],
   reducers: {
-    selecPlayer: (state, action) => {
+    selectPlayer(state, action) {
       const newValue = action.payload
-      state.forEach(player => {
-        if (player.value === newValue) {
-          player.selected = true
-        } else {
-          player.selected = false
-        }
+      state.forEach(p => {
+        p.selected = p.value === newValue
       })
     },
   },
 })
 
-export const {selecPlayer} = selectedSlice.actions
-export default selectedSlice.reducer
+// exportamos la action
+export const {selectPlayer} = playersSlice.actions
+
+// selector para obtener TODO el arreglo de players
+export const selectPlayers = state => state.players
+
+// **AÑADE** este selector para el jugador activo:
+export const selectCurrentPlayer = state => state.players.find(p => p.selected)
+
+// el reducer por defecto
+export default playersSlice.reducer

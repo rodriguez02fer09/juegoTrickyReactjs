@@ -1,3 +1,4 @@
+// src/components/ButtonRestart.jsx
 import '../styles/desktop.scss'
 
 const ButtonRestart = ({onClick}) => {
@@ -25,9 +26,10 @@ const ButtonRestart = ({onClick}) => {
             width="52"
             height="52"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            {/* Aquí camelCase */}
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"

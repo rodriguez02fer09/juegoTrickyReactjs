@@ -1,27 +1,24 @@
+// src/redux/store.js
 import {configureStore} from '@reduxjs/toolkit'
-import selectedReducer from './players/slice'
-import boardSlice from './board/slice'
+import playersReducer from './players/slice'
+import boardReducer from './board/slice'
 
-const reHydrateStore = () => {
-  if (localStorage.getItem('players') !== null) {
-    return JSON.parse(localStorage.getItem('players')) // re-hydrate the store
-  }
-}
-
-const playersMiddleware = ({getState}) => {
-  return next => action => {
+// Middleware que persiste sólo el slice de players en localStorage
+const playersMiddleware =
+  ({getState}) =>
+  next =>
+  action => {
     const result = next(action)
     localStorage.setItem('players', JSON.stringify(getState().players))
     return result
   }
-}
 
 export const store = configureStore({
   reducer: {
-    players: selectedReducer,
-    board: boardSlice,
+    players: playersReducer,
+    board: boardReducer,
   },
-  preloadedState: reHydrateStore(),
+
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(playersMiddleware),
 })
