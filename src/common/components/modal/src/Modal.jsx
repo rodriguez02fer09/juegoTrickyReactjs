@@ -1,15 +1,17 @@
+// src/common/components/modal/src/Modal.jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import '../style/desktop.scss'
-import ReportGame from '../../reportGame/src/ReportGame'
 
-const Modal = ({children}) => {
+const Modal = ({children, containerId = 'modal'}) => {
+  const mount = document.getElementById(containerId)
+  if (!mount) return null
   return ReactDOM.createPortal(
     <>
-      <div className="modalBackground"></div>
+      <div className="modalBackground" />
       <div className="modal">{children}</div>
     </>,
-    document.getElementById('modal'),
+    mount,
   )
 }
 

@@ -1,14 +1,13 @@
-/* src/common/components/modal/src/style/desktop.scss */
-
-/* Fondo del modal */
+/* --------------------------------------------------------
+   Global: fondo y contenedor base de TODOS los modales
+   -------------------------------------------------------- */
 .modalBackground {
   position: fixed;
-  inset: 0;
+  inset: 0; /* ocupa toda la pantalla */
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
 }
 
-/* Contenedor base de todos los modales */
 .modal {
   position: fixed;
   top: 50%;
@@ -16,32 +15,13 @@
   transform: translate(-50%, -50%);
   background-color: #1f3641;
   padding: 20px;
-  width: 500px;
+
   max-width: 90vw;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Tablet (399px–834px) */
-@media (min-width: 399px) and (max-width: 834px) {
-  .modal {
-    width: 80vw;
-    max-width: 360px;
-  }
-}
-
-/* Móvil (≤ 398px) */
-@media (max-width: 398px) {
-  .modal {
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90vw;
-    padding: 16px;
-    max-width: none;
-  }
-}
+/* Tablet */
