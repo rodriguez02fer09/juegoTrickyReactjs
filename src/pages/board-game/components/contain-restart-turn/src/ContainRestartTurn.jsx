@@ -2,19 +2,13 @@ import '../styles/desktop.scss'
 import PlayerTurn from '../../player-turn/src/PlayerTurn'
 import ButtonRestart from '../../button-restart/src/ButtonRestart'
 
-const ContainRestartTurn = ({value, handleReset}) => {
+const ContainRestartTurn = ({value, onRestartClick}) => {
   const baseClass = 'contain-restart-turn'
 
   return (
     <div className={baseClass}>
-      {/* Botón para limpiar el tablero */}
-      <ButtonRestart onClick={handleReset} />
-
-      {/* Muestra el turno actual o ganador */}
+      <ButtonRestart onClick={onRestartClick} />
       <PlayerTurn value={value} />
-
-      {/* Logo de letras */}
-
       <div className="contain-letters">
         <svg
           xmlns="http://www.w3.org/2000/svg"
