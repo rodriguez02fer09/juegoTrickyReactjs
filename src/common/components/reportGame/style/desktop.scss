@@ -1,7 +1,6 @@
 .contain-reportGame {
   width: 491px;
   height: 176px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -63,5 +62,48 @@
   }
   &--contain-button {
     margin-left: 70px;
+  }
+}
+@media screen and (min-width: 399px) and (max-width: 834px) {
+}
+
+@media screen and (min-width: 835px) {
+}
+@media (max-width: 398px) {
+  .contain-reportGame {
+    width: 404px;
+
+    &--letter-report {
+      width: 95px;
+      height: 20px;
+
+      margin-bottom: 10px;
+
+      &__textReport {
+        color: var(--Silver, #a8bfc9);
+        text-align: center;
+        font-feature-settings: 'clig' off, 'liga' off;
+        /* Heading (Extra Small) */
+        font-family: Outfit;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+    }
+    &--contain-textRound {
+      width: 400px;
+      &__blue {
+        font-size: 24px;
+      }
+      &__yellow {
+        font-size: 24px;
+      }
+    }
+    &--contain-button {
+      margin-left: 70px;
+    }
   }
 }

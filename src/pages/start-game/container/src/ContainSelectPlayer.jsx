@@ -6,7 +6,7 @@ import {
   selectCurrentPlayer,
   selectPlayer as selectPlayerAction,
 } from '../../../../redux/players/slice'
-
+import '../style/desktop.scss'
 import SelectPlayer from '../../components/selectPlayer'
 
 const ContainSelectPlayer = ({type, label}) => {

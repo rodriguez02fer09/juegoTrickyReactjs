@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 
 const SelectPlayer = ({type, label, players}) => {
   return (
-    <div className="contain-select-player">
+    <div className="select-player">
       <div className="contain-letters">
         <svg
           xmlns="http://www.w3.org/2000/svg"

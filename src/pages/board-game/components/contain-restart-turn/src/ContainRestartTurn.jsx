@@ -14,9 +14,7 @@ const ContainRestartTurn = ({value, handleReset}) => {
       <PlayerTurn value={value} />
 
       {/* Logo de letras */}
-      <div className={`${baseClass}__letters`}>
-        {/* SVG omitido para brevedad */}
-      </div>
+
       <div className="contain-letters">
         <svg
           xmlns="http://www.w3.org/2000/svg"

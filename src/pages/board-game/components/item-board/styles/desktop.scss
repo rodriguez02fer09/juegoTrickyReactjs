@@ -8,3 +8,18 @@
   display: flex;
   justify-content: center;
 }
+@media screen and (min-width: 399px) and (max-width: 834px) {
+}
+
+@media screen and (min-width: 835px) {
+}
+@media (max-width: 398px) {
+  .item-board {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

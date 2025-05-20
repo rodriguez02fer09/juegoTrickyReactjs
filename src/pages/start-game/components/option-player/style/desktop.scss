@@ -9,3 +9,17 @@
     background-color: #a8bfc9;
   }
 }
+
+@media screen and (min-width: 399px) and (max-width: 834px) {
+  .option-player {
+  }
+}
+
+@media screen and (min-width: 835px) {
+}
+
+@media (max-width: 398px) {
+  .option-player {
+    width: 160px;
+  }
+}

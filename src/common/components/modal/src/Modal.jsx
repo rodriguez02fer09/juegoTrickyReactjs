@@ -6,8 +6,8 @@ import ReportGame from '../../reportGame/src/ReportGame'
 const Modal = ({children}) => {
   return ReactDOM.createPortal(
     <>
-      <div className="ModalBackground"></div>
-      <div className="Modal">{children}</div>
+      <div className="modalBackground"></div>
+      <div className="modal">{children}</div>
     </>,
     document.getElementById('modal'),
   )

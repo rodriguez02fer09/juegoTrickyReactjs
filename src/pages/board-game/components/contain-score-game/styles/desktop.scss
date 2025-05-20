@@ -7,3 +7,13 @@
   justify-content: space-between;
   align-items: center;
 }
+@media screen and (min-width: 399px) and (max-width: 834px) {
+}
+
+@media screen and (min-width: 835px) {
+}
+@media (max-width: 398px) {
+  .Contain-score-game {
+    width: 350px;
+  }
+}
