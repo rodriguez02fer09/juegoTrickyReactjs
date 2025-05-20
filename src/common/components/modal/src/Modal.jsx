@@ -3,15 +3,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import '../style/desktop.scss'
 
-const Modal = ({children, containerId = 'modal'}) => {
-  const mount = document.getElementById(containerId)
-  if (!mount) return null
+const Modal = ({children}) => {
   return ReactDOM.createPortal(
-    <>
-      <div className="modalBackground" />
+    <div className="modalBackground">
       <div className="modal">{children}</div>
-    </>,
-    mount,
+    </div>,
+    document.body, // monta SIEMPRE en el body, nunca dentro de #root ni en otro div
   )
 }
 
