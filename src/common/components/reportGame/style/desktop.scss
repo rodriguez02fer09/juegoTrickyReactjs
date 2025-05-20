@@ -1,109 +1,91 @@
+/* src/common/components/reportGame/src/desktop.scss */
+
+/* Wrapper fluido para “YOU WON!” */
 .contain-reportGame {
-  width: 491px;
-  height: 176px;
+  width: 100%;
+  max-width: 491px; /* sólo en desktop */
+  margin: 0 auto; /* centrar */
+  padding: 0 20px;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  &--letter-report {
-    width: 95px;
-    height: 20px;
-
-    margin-bottom: 10px;
-
-    &__textReport {
-      color: var(--Silver, #a8bfc9);
-      text-align: center;
-      font-feature-settings: 'clig' off, 'liga' off;
-      /* Heading (Extra Small) */
-      font-family: Outfit;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-  }
-  &--contain-textRound {
-    width: 491px;
-    height: 64px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 28px;
-
-    &__blue {
-      color: #31c3bd;
-      font-feature-settings: 'clig' off, 'liga' off;
-      /* Heading (Large) */
-      font-family: Outfit;
-      font-size: 34px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-    }
-    &__yellow {
-      color: #f2b137;
-      font-feature-settings: 'clig' off, 'liga' off;
-      /* Heading (Large) */
-      font-family: Outfit;
-      font-size: 34px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-    }
-  }
-  &--contain-button {
-    margin-left: 70px;
-  }
-}
-@media screen and (min-width: 399px) and (max-width: 834px) {
 }
 
-@media screen and (min-width: 835px) {
+/* Texto “YOU WON!” */
+.contain-reportGame--letter-report {
+  margin-bottom: 10px;
+
+  &__textReport {
+    color: var(--Silver, #a8bfc9);
+    text-align: center;
+    font-family: Outfit;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-style: normal;
+    line-height: normal;
+  }
 }
+
+/* “TAKES THE ROUND” */
+.contain-reportGame--contain-textRound {
+  width: 100%; /* fluido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 28px;
+  box-sizing: border-box;
+
+  &__blue {
+    color: #31c3bd;
+    font-family: Outfit;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-style: normal;
+    line-height: normal;
+  }
+  &__yellow {
+    color: #f2b137;
+    font-family: Outfit;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-style: normal;
+    line-height: normal;
+  }
+}
+
+/* Botones */
+.contain-reportGame--contain-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  gap: 16px;
+}
+
+/* Móvil: full-width y padding reducido */
 @media (max-width: 398px) {
   .contain-reportGame {
-    width: 404px;
+    max-width: none;
+    padding: 0 12px;
+  }
+}
 
-    &--letter-report {
-      width: 95px;
-      height: 20px;
-
-      margin-bottom: 10px;
-
-      &__textReport {
-        color: var(--Silver, #a8bfc9);
-        text-align: center;
-        font-feature-settings: 'clig' off, 'liga' off;
-        /* Heading (Extra Small) */
-        font-family: Outfit;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-    }
-    &--contain-textRound {
-      width: 400px;
-      &__blue {
-        font-size: 24px;
-      }
-      &__yellow {
-        font-size: 24px;
-      }
-    }
-    &--contain-button {
-      margin-left: 70px;
-    }
+/* Tablet: full-width y padding medio */
+@media (min-width: 399px) and (max-width: 834px) {
+  .contain-reportGame {
+    max-width: none;
+    padding: 0 16px;
   }
 }

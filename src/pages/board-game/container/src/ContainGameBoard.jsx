@@ -111,7 +111,7 @@ export default function ContainGameBoard() {
 
       {/* Modal de victoria */}
       {winnerSymbol && (
-        <Modal containerId="modal-winner">
+        <Modal id="modal">
           <ReportGame
             takeRound="TAKES THE ROUND"
             textReport="YOU WON!"
@@ -123,14 +123,14 @@ export default function ContainGameBoard() {
 
       {/* Modal de empate */}
       {isTie && !winnerSymbol && (
-        <Modal containerId="modal-tied">
+        <Modal id="modal">
           <ModalTied onClick={handleReset} />
         </Modal>
       )}
 
       {/* Modal de confirmación de reinicio */}
       {showRestartModal && (
-        <Modal containerId="modal-reststart">
+        <Modal id="modal">
           <ModalReststart
             onConfirm={handleReset} // limpia el tablero
             onCancel={() => setShowRestartModal(false)}

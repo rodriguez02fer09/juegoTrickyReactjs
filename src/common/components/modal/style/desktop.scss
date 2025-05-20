@@ -1,27 +1,41 @@
-/* --------------------------------------------------------
-   Global: fondo y contenedor base de TODOS los modales
-   -------------------------------------------------------- */
+/* src/common/components/modal/style/desktop.scss */
+
+/* 1) Backdrop full-screen + flex-center */
 .modalBackground {
   position: fixed;
-  inset: 0; /* ocupa toda la pantalla */
+  inset: 0; /* top/right/bottom/left = 0 */
+  display: flex; /* centra por flex */
+  justify-content: center; /* centrar horizontal */
+  align-items: center; /* centrar vertical */
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
+  padding: 0; /* full-width sin márgenes extras */
 }
 
+/* 2) Panel full-width dentro del backdrop */
 .modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #1f3641;
+  width: 100%; /* todo el ancho del backdrop */
+  box-sizing: border-box; /* incluye padding en el ancho */
   padding: 20px;
-
-  max-width: 90vw;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  background-color: #1f3641;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 0; /* esquinas cuadradas */
 }
 
-/* Tablet */
+/* 3) Ajustes para móvil */
+@media (max-width: 398px) {
+  .modal {
+    width: 100vw; /* todo el ancho del viewport */
+    padding: 12px;
+  }
+}
+
+/* 4) Ajustes para tablet */
+@media (min-width: 399px) and (max-width: 834px) {
+  .modal {
+    width: 100vw;
+    padding: 16px;
+  }
+}
