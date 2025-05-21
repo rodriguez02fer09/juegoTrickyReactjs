@@ -6,7 +6,7 @@ const useLocalStorage = initialPlayers => {
     JSON.parse(localStorage.getItem('players')) || initialPlayers
   const selectPlayer = useSelector(state => state.players)
   const dispatch = useDispatch()
-  //const [statePlayers, setStatePlayers] = useState(storedPlayers)
+  const [statePlayers, setStatePlayers] = useState(storedPlayers)
 
   const selecPlayer = player => {
     const indexPlayer = statePlayers.findIndex(p => p.value === player)
