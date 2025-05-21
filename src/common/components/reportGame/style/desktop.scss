@@ -1,91 +1,60 @@
 /* src/common/components/reportGame/src/desktop.scss */
 
-/* Wrapper fluido para “YOU WON!” */
 .contain-reportGame {
+  /* Ocupa todo el ancho de su padre (.modal) */
   width: 100%;
-  max-width: 491px; /* sólo en desktop */
-  margin: 0 auto; /* centrar */
-  padding: 0 20px;
+  /* Asegúrate de que respete el padding del padre */
   box-sizing: border-box;
 
+  /* Centramos contenido internamente */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-/* Texto “YOU WON!” */
 .contain-reportGame--letter-report {
   margin-bottom: 10px;
-
-  &__textReport {
-    color: var(--Silver, #a8bfc9);
-    text-align: center;
-    font-family: Outfit;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-style: normal;
-    line-height: normal;
-  }
 }
 
-/* “TAKES THE ROUND” */
+.contain-reportGame--letter-report__textReport {
+  color: var(--Silver, #a8bfc9);
+  text-align: center;
+  font-family: Outfit;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
 .contain-reportGame--contain-textRound {
-  width: 100%; /* fluido */
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 28px;
-  box-sizing: border-box;
-
-  &__blue {
-    color: #31c3bd;
-    font-family: Outfit;
-    font-size: 34px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-style: normal;
-    line-height: normal;
-  }
-  &__yellow {
-    color: #f2b137;
-    font-family: Outfit;
-    font-size: 34px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-style: normal;
-    line-height: normal;
-  }
 }
 
-/* Botones */
+.contain-reportGame--contain-textRound__blue,
+.contain-reportGame--contain-textRound__yellow {
+  font-family: Outfit;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.contain-reportGame--contain-textRound__blue {
+  color: #31c3bd;
+}
+
+.contain-reportGame--contain-textRound__yellow {
+  color: #f2b137;
+}
+
 .contain-reportGame--contain-button {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 16px;
   gap: 16px;
-}
-
-/* Móvil: full-width y padding reducido */
-@media (max-width: 398px) {
-  .contain-reportGame {
-    max-width: none;
-    padding: 0 12px;
-  }
-}
-
-/* Tablet: full-width y padding medio */
-@media (min-width: 399px) and (max-width: 834px) {
-  .contain-reportGame {
-    max-width: none;
-    padding: 0 16px;
-  }
+  margin-top: 16px;
 }

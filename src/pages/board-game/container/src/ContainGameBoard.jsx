@@ -8,7 +8,7 @@ import ContainScoreGame from '../../components/contain-score-game/src/ContainSco
 
 import {findWinningLine, winnerPosition} from '../../../../utils'
 
-import Confetti from '../../../board-game/components/winnwr-confetti'
+import WinnerConfetti from '../../../board-game/components/winnwr-confetti'
 import Modal from '../../../../common/components/modal/src/Modal'
 import ReportGame from '../../../../common/components/reportGame/src/ReportGame'
 import ModalTied from '../../../../common/components/modal-tied/src/ModalTied'
@@ -107,11 +107,11 @@ export default function ContainGameBoard() {
   return (
     <div className="contain-game-board">
       {/* Confetti al ganar */}
-      {showConfetti && <Confetti />}
+      {showConfetti && <WinnerConfetti />}
 
       {/* Modal de victoria */}
       {winnerSymbol && (
-        <Modal id="modal">
+        <Modal>
           <ReportGame
             takeRound="TAKES THE ROUND"
             textReport="YOU WON!"
@@ -123,14 +123,14 @@ export default function ContainGameBoard() {
 
       {/* Modal de empate */}
       {isTie && !winnerSymbol && (
-        <Modal id="modal">
+        <Modal>
           <ModalTied onClick={handleReset} />
         </Modal>
       )}
 
       {/* Modal de confirmación de reinicio */}
       {showRestartModal && (
-        <Modal id="modal">
+        <Modal>
           <ModalReststart
             onConfirm={handleReset} // limpia el tablero
             onCancel={() => setShowRestartModal(false)}
