@@ -8,8 +8,8 @@ const ReportGame = ({textReport, takeRound, value, onClick}) => {
   const base = 'contain-reportGame'
   const roundClass =
     value === 'x'
-      ? `${base}--contain-textRound__yellow`
-      : `${base}--contain-textRound__blue`
+      ? `${base}--contain-textRound__blue`
+      : `${base}--contain-textRound__yellow`
 
   return (
     <div className={base}>
