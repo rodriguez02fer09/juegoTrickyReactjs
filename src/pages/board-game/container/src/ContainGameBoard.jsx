@@ -1,3 +1,4 @@
+// src/components/contain-game-board/src/ContainGameBoard.jsx
 import React, {useState, useEffect, useContext} from 'react'
 import '../styles/desktop.scss'
 import {useSelector} from 'react-redux'
@@ -31,7 +32,7 @@ export default function ContainGameBoard() {
   const [tieCount, setTieCount] = useState(0)
   const [showRestartModal, setShowRestartModal] = useState(false)
 
-  // Inicializo el turno y el tablero cuando cambia la elección de jugador inicial
+  // Inicializo turno y tablero al cambiar selección de jugador:
   useEffect(() => {
     if (playerChoice === 'x' || playerChoice === 'o') {
       setTurn(playerChoice)
@@ -39,13 +40,21 @@ export default function ContainGameBoard() {
     }
   }, [playerChoice])
 
-  const handleReset = () => {
+  // **Cuando X+O+Empates llega a 8, reseteo sólo esos contadores**:
+  useEffect(() => {
+    if (playerXWin + playerOWin + tieCount >= 8) {
+      setPlayerXWin(0)
+      setPlayerOWin(0)
+      setTieCount(0)
+    }
+  }, [playerXWin, playerOWin, tieCount])
+
+  const resetRound = () => {
     setBoard(emptyBoard)
     setTurn(playerChoice || '')
     setWinnerSymbol(null)
     setIsTie(false)
     setShowConfetti(false)
-    setTieCount(0)
     setShowRestartModal(false)
   }
 
@@ -55,27 +64,32 @@ export default function ContainGameBoard() {
   const handleCellClick = idx => {
     if (!turn || winnerSymbol || isTie || board[idx].value) return
 
-    // Pinto la celda con el símbolo del turno actual
+    // Pinto la casilla
     const newBoard = board.map(cell =>
       cell.index === idx ? {...cell, value: turn} : cell,
     )
     setBoard(newBoard)
 
-    // Compruebo ganador o empate...
+    // Compruebo ganador
     const {winner, positions} = findWinningLine(turn, newBoard)
     if (winner) {
       setWinnerSymbol(turn)
       setShowConfetti(true)
       setBoard(prev => winnerPosition(prev, positions))
-      // actualizo marcador...
-      return
-    }
-    if (newBoard.every(c => c.value !== '')) {
-      setIsTie(true)
+      // Incremento marcador
+      if (turn === 'x') setPlayerXWin(px => px + 1)
+      else setPlayerOWin(po => po + 1)
       return
     }
 
-    // Cambio de turno para la siguiente jugada
+    // Compruebo empate
+    if (newBoard.every(c => c.value !== '')) {
+      setIsTie(true)
+      setTieCount(tc => tc + 1)
+      return
+    }
+
+    // Cambio de turno
     setTurn(t => (t === 'x' ? 'o' : 'x'))
   }
 
@@ -89,23 +103,20 @@ export default function ContainGameBoard() {
             takeRound="TAKES THE ROUND"
             textReport="YOU WON!"
             value={winnerSymbol}
-            onClick={handleReset}
+            onClick={resetRound}
           />
         </Modal>
       )}
 
       {isTie && !winnerSymbol && (
         <Modal>
-          <ModalTied onClick={handleReset} />
+          <ModalTied onClick={resetRound} />
         </Modal>
       )}
 
       {showRestartModal && (
         <Modal>
-          <ModalReststart
-            onConfirm={handleReset}
-            onCancel={closeRestartModal}
-          />
+          <ModalReststart onConfirm={resetRound} onCancel={closeRestartModal} />
         </Modal>
       )}
 
@@ -116,7 +127,6 @@ export default function ContainGameBoard() {
         />
       )}
 
-      {/* Aquí pasamos `turn` al Board */}
       <Board
         board={board}
         handleCellClick={handleCellClick}
