@@ -1,15 +1,12 @@
 .component-letter {
   &--empty__x {
-    fill: #1f3641;
     opacity: 0;
     transition: 0.5s;
     &:hover {
       opacity: 1;
     }
   }
-
   &--empty__o {
-    fill: rgb(242, 177, 55);
     opacity: 0;
     transition: 0.5s;
     &:hover {

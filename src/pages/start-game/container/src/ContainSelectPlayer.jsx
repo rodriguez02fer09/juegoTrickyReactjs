@@ -1,27 +1,30 @@
-import '../index.scss'
-import SelectPlayer from '../../components/selectPlayer'
-import ComponentLetters from '../../../../common/components/component-letters'
+// src/pages/start-game/ContainSelectPlayer.jsx
+import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-
-import Button from '../../../../common/components/button'
+import {
+  selectPlayers,
+  selectCurrentPlayer,
+  selectPlayer as selectPlayerAction,
+} from '../../../../redux/players/slice'
+import '../style/desktop.scss'
+import SelectPlayer from '../../components/selectPlayer'
 
 const ContainSelectPlayer = ({type, label}) => {
-  const currentPlayer = useSelector(state => {
-    return state.players
-  })
-
   const dispatch = useDispatch()
+  const players = useSelector(selectPlayers)
+  const current = useSelector(selectCurrentPlayer)
 
-  const handleSelect = playerValue => {
-    // dispatch(selectPlayer())
+  const handleSelect = value => {
+    dispatch(selectPlayerAction(value))
   }
 
   return (
     <SelectPlayer
       type={type}
       label={label}
-      players={currentPlayer}
-      onhandleChange={handleSelect}
+      players={players}
+      current={current}
+      onHandleChange={handleSelect}
     />
   )
 }

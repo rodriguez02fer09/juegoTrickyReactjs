@@ -1,17 +1,18 @@
 import '../style/desktop.scss'
 import PlayersSelect from '../../players-select/src/PlayersSelect'
 import {useDispatch} from 'react-redux'
-import {selecPlayer} from '../../../../../redux/slice'
+import {selectPlayer} from '../../../../../redux/players/slice'
 
 const OptionPlayer = ({player}) => {
   const dispatch = useDispatch()
 
-  const {value, selected} = player || {} //asignación con valor predeterminado
+  const {value, selected} = player || {}
   const defaultPlayer = `option-player`
   const selectedValue = selected ? 'active' : ''
 
   const onClick = () => {
-    dispatch(selecPlayer(value))
+    console.log('Dispatching selectPlayer for:', value)
+    dispatch(selectPlayer(value))
   }
 
   return (

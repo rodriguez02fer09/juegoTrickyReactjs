@@ -1,153 +1,133 @@
+import React, {useState, useEffect, useContext} from 'react'
 import '../styles/desktop.scss'
-import {useState} from 'react'
-import ContainRestartTurn from '../../components/contain-restart-turn'
+import {useSelector} from 'react-redux'
+
+import ContainRestartTurn from '../../components/contain-restart-turn/src/ContainRestartTurn'
 import Board from '../../components/board/src/Board'
 import ContainScoreGame from '../../components/contain-score-game/src/ContainScoreGame'
-import {
-  getByColumn,
-  winnerAllColumns,
-  winer,
-  getByRow,
-  wionnerAllRows,
-  getRigthDiagonal,
-  getDiagonalLeft,
-  winnerPosition,
-} from '../../../../utils/index'
-import Confetti from '../../../board-game/components/winnwr-confetti/index'
+
+import {findWinningLine, winnerPosition} from '../../../../utils'
+import {TrickyContext} from '../../../../Context'
+import WinnerConfetti from '../../../board-game/components/winnwr-confetti'
 import Modal from '../../../../common/components/modal/src/Modal'
 import ReportGame from '../../../../common/components/reportGame/src/ReportGame'
-import ModalReststart from '../../../../common/components/modal-reststart/src/ModalReststart'
 import ModalTied from '../../../../common/components/modal-tied/src/ModalTied'
+import ModalReststart from '../../../../common/components/modal-reststart/src/ModalReststart'
 
-const ContainGameBoard = ({
-  type,
-  label,
-  textReport,
-  takeRound,
-  value,
-  onClick,
-}) => {
-  const initialBoard = [
-    {p: '0,0', value: '', index: '0', selected: false, winner: false},
-    {p: '0,1', value: '', index: '1', selected: false, winner: false},
-    {p: '0,2', value: '', index: '2', selected: false, winner: false},
-    {p: '1,0', value: '', index: '3', selected: false, winner: false},
-    {p: '1,1', value: '', index: '4', selected: false, winner: false},
-    {p: '1,2', value: '', index: '5', selected: false, winner: false},
-    {p: '2,0', value: '', index: '6', selected: false, winner: false},
-    {p: '2,1', value: '', index: '7', selected: false, winner: false},
-    {p: '2,2', value: '', index: '8', selected: false, winner: false},
-  ]
+export default function ContainGameBoard() {
+  const {getPlayerSelect} = useContext(TrickyContext)
+  const playerChoice = getPlayerSelect()
 
-  const [board, setBoard] = useState(initialBoard)
+  const templateBoard = useSelector(state => state.board)
+  const emptyBoard = templateBoard.map(cell => ({...cell, value: ''}))
 
-  const [winner, setWinner] = useState(false)
-
+  const [board, setBoard] = useState(emptyBoard)
+  const [turn, setTurn] = useState('')
+  const [winnerSymbol, setWinnerSymbol] = useState(null)
+  const [isTie, setIsTie] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
   const [playerXWin, setPlayerXWin] = useState(0)
   const [playerOWin, setPlayerOWin] = useState(0)
+  const [tieCount, setTieCount] = useState(0)
+  const [showRestartModal, setShowRestartModal] = useState(false)
 
-  // const upDateBoard = i => {
-  //   const newBoard = [...board]
-  //   newBoard[i].value = currentPlayer
-  //   newBoard[i].selected = true
-  //   setBoard(newBoard)
-  // }
-  // const prevPlayerWins = winnerPlayer => {
-  //   if (currentPlayer === 'x') {
-  //     setPlayerXWin(state => state + 1)
-  //   }
-  //   if (currentPlayer === 'o') {
-  //     setPlayerOWin(state => state + 1)
-  //   }
-  // }
-  // const winnerPlayer = () => {
-  //   if (
-  //     winnerAllColumns(currentPlayer, board) ||
-  //     wionnerAllRows(currentPlayer, board) ||
-  //     winer(getRigthDiagonal(board), currentPlayer) ||
-  //     winer(getDiagonalLeft(board), currentPlayer)
-  //   ) {
-  //     console.log('ganador')
-  //     setWinner(() => true)
-  //     prevPlayerWins(currentPlayer)
-  //   }
-  // }
+  // Inicializo el turno y el tablero cuando cambia la elección de jugador inicial
+  useEffect(() => {
+    if (playerChoice === 'x' || playerChoice === 'o') {
+      setTurn(playerChoice)
+      setBoard(emptyBoard)
+    }
+  }, [playerChoice])
 
-  // const swichPlayer = () => {
-  //   if (!winner) {
-  //     // Verifica si NO hay un ganador
-  //     if (currentPlayer === 'o') {
-  //       selecPlayer('x')
-  //     } else if (currentPlayer === 'x') {
-  //       selecPlayer('o')
-  //     }
-  //   }
-  // }
+  const handleReset = () => {
+    setBoard(emptyBoard)
+    setTurn(playerChoice || '')
+    setWinnerSymbol(null)
+    setIsTie(false)
+    setShowConfetti(false)
+    setTieCount(0)
+    setShowRestartModal(false)
+  }
 
-  // const handleCellClick = i => {
-  //   if (winner) {
-  //     return false
-  //   }
-  //   //actualizar el tablero
-  //   upDateBoard(i)
-  //   //intercala los jugadores
-  //   swichPlayer()
-  //   //ganador
-  //   winnerPlayer()
-  // }
+  const openRestartModal = () => setShowRestartModal(true)
+  const closeRestartModal = () => setShowRestartModal(false)
 
-  // const handleReset = () => {
-  //   setBoard(initialBoard)
-  //   setWinner(false)
-  // }
+  const handleCellClick = idx => {
+    if (!turn || winnerSymbol || isTie || board[idx].value) return
 
-  // const handleNextRound = () => {
-  //   setBoard(() => initialBoard)
-  //   setWinner(state => !state)
-  //   console.log('click')
-  // }
+    // Pinto la celda con el símbolo del turno actual
+    const newBoard = board.map(cell =>
+      cell.index === idx ? {...cell, value: turn} : cell,
+    )
+    setBoard(newBoard)
 
-  const showResetModal = () => {
-    setShowModal(true)
+    // Compruebo ganador o empate...
+    const {winner, positions} = findWinningLine(turn, newBoard)
+    if (winner) {
+      setWinnerSymbol(turn)
+      setShowConfetti(true)
+      setBoard(prev => winnerPosition(prev, positions))
+      // actualizo marcador...
+      return
+    }
+    if (newBoard.every(c => c.value !== '')) {
+      setIsTie(true)
+      return
+    }
+
+    // Cambio de turno para la siguiente jugada
+    setTurn(t => (t === 'x' ? 'o' : 'x'))
   }
 
   return (
     <div className="contain-game-board">
-      {winner && <Confetti />}
-      {winner && (
+      {showConfetti && <WinnerConfetti />}
+
+      {winnerSymbol && (
         <Modal>
           <ReportGame
             takeRound="TAKES THE ROUND"
             textReport="YOU WON!"
-            type={type}
-            label={label}
-            value={currentPlayer}
-            //onClick={handleNextRound}
+            value={winnerSymbol}
+            onClick={handleReset}
           />
         </Modal>
       )}
-      {showModal && (
+
+      {isTie && !winnerSymbol && (
         <Modal>
-          <ModalReststart type={type} label={label} onClick={handleReset} />
-        </Modal>
-      )}
-      {isTied && (
-        <Modal>
-          <ModalTied type={type} label={label} onClick={handleNextRound} />
+          <ModalTied onClick={handleReset} />
         </Modal>
       )}
 
-      <ContainRestartTurn
-      //value={winner ? ('x' === currentPlayer ? 'o' : 'x') : currentPlayer}
-      //handleReset={handleReset}
-      />
+      {showRestartModal && (
+        <Modal>
+          <ModalReststart
+            onConfirm={handleReset}
+            onCancel={closeRestartModal}
+          />
+        </Modal>
+      )}
+
+      {turn && (
+        <ContainRestartTurn
+          value={winnerSymbol ?? (isTie ? '' : turn)}
+          onRestartClick={openRestartModal}
+        />
+      )}
+
+      {/* Aquí pasamos `turn` al Board */}
       <Board
         board={board}
-        // handleCellClick={handleCellClick}
+        handleCellClick={handleCellClick}
+        playerTurn={turn}
       />
-      <ContainScoreGame playerXWin={playerXWin} playerOWin={playerOWin} />
+
+      <ContainScoreGame
+        playerXWin={playerXWin}
+        playerOWin={playerOWin}
+        ties={tieCount}
+      />
     </div>
   )
 }
-
-export default ContainGameBoard

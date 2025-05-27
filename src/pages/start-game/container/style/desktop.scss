@@ -14,3 +14,17 @@
     margin-bottom: 40px;
   }
 }
+@media screen and (min-width: 399px) and (max-width: 834px) {
+}
+
+@media screen and (min-width: 835px) {
+}
+@media (max-width: 398px) {
+  .contain-select-player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+  }
+}

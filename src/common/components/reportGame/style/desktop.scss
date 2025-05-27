@@ -1,67 +1,57 @@
-.contain-reportGame {
-  width: 491px;
-  height: 176px;
+/* src/common/components/reportGame/src/desktop.scss */
 
+.contain-reportGame {
+  /* Ocupa todo el ancho de su padre (.modal) */
+  width: 100%;
+  /* Asegúrate de que respete el padding del padre */
+  box-sizing: border-box;
+
+  /* Centramos contenido internamente */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
 
-  &--letter-report {
-    width: 95px;
-    height: 20px;
+.contain-reportGame--letter-report {
+}
 
-    margin-bottom: 10px;
+.contain-reportGame--letter-report__textReport {
+  color: var(--Silver, #a8bfc9);
+  text-align: center;
+  font-family: Outfit;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1;
+}
 
-    &__textReport {
-      color: var(--Silver, #a8bfc9);
-      text-align: center;
-      font-feature-settings: 'clig' off, 'liga' off;
-      /* Heading (Extra Small) */
-      font-family: Outfit;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-  }
-  &--contain-textRound {
-    width: 491px;
-    height: 64px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 28px;
+.contain-reportGame--contain-textRound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    &__blue {
-      color: #31c3bd;
-      font-feature-settings: 'clig' off, 'liga' off;
-      /* Heading (Large) */
-      font-family: Outfit;
-      font-size: 34px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-    }
-    &__yellow {
-      color: #f2b137;
-      font-feature-settings: 'clig' off, 'liga' off;
-      /* Heading (Large) */
-      font-family: Outfit;
-      font-size: 34px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-    }
-  }
-  &--contain-button {
-    margin-left: 70px;
-  }
+.contain-reportGame--contain-textRound__blue,
+.contain-reportGame--contain-textRound__yellow {
+  font-family: Outfit;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.contain-reportGame--contain-textRound__blue {
+  color: #31c3bd;
+}
+
+.contain-reportGame--contain-textRound__yellow {
+  color: #f2b137;
+}
+
+.contain-reportGame--contain-button {
+  display: flex;
+  gap: 16px;
 }

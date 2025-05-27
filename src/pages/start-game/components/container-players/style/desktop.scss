@@ -9,3 +9,19 @@
   background-color: #1a2a33;
   border-radius: 10px;
 }
+
+@media screen and (min-width: 399px) and (max-width: 834px) {
+  .containerPlayers {
+  }
+}
+
+@media screen and (min-width: 835px) {
+  .containerPlayers {
+  }
+}
+@media (max-width: 398px) {
+  .containerPlayers {
+    width: 330px;
+    align-items: center;
+  }
+}

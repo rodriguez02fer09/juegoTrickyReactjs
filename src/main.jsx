@@ -1,13 +1,17 @@
+// src/main.jsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import {Provider as ReduxProvider} from 'react-redux'
+import {store} from './redux/store'
+import {TrickyProvider} from './Context/index.jsx' // ajusta la ruta
 
-ReactDOM.createRoot(
-  //para renderizar y construir el componente que contiene la logica
-  document.getElementById('root'),
-).render(
-  //elemento donde se renderiza la aplicacion
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <ReduxProvider store={store}>
+      <TrickyProvider>
+        <App />
+      </TrickyProvider>
+    </ReduxProvider>
   </React.StrictMode>,
 )

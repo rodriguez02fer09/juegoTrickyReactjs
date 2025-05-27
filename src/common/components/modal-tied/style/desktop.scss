@@ -1,5 +1,5 @@
 .contain-tied {
-  width: 275px;
+  width: 324px;
   height: 133px;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,10 @@
   &--contain-text {
     width: 275px;
     height: 52px;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     &__text {
       color: var(--Silver, #a8bfc9);
       text-align: center;
@@ -32,4 +35,11 @@
     flex-direction: row;
     justify-content: center;
   }
+}
+@media screen and (min-width: 399px) and (max-width: 834px) {
+}
+
+@media screen and (min-width: 835px) {
+}
+@media (max-width: 398px) {
 }

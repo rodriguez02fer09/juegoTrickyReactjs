@@ -12,3 +12,16 @@
     flex-direction: row;
   }
 }
+@media screen and (min-width: 399px) and (max-width: 834px) {
+}
+
+@media screen and (min-width: 835px) {
+}
+@media (max-width: 398px) {
+  .contain-restart-turn {
+    width: 350px;
+
+    &__letters {
+    }
+  }
+}

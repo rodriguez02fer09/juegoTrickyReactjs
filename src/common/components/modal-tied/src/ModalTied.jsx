@@ -1,9 +1,10 @@
+// src/common/components/modal-tied/src/ModalTied.jsx
 import React from 'react'
-import Button from '../../button/src/Button'
-import '../style/desktop.scss' // Importa los estilos
 import {Link} from 'react-router-dom'
+import Button from '../../button/src/Button'
+import '../style/desktop.scss'
 
-const ModalTied = ({type, label, onClick}) => {
+const ModalTied = ({onClick}) => {
   const defaultTied = 'contain-tied'
   const containText = 'contain-text'
   const containButton = 'contain-button'
@@ -15,16 +16,9 @@ const ModalTied = ({type, label, onClick}) => {
       </div>
       <div className={`${defaultTied}--${containButton}`}>
         <Link to="/">
-          <Button type={'small-gray'} label={'QUIT'} />
+          <Button type="small-gray" label="QUIT" />
         </Link>
-        <Button
-          onClick={() => {
-            console.log('click')
-            onClick()
-          }}
-          type={'small-yellow'}
-          label={'NEXT ROUND'}
-        />
+        <Button onClick={onClick} type="small-yellow" label="NEXT ROUND" />
       </div>
     </div>
   )
