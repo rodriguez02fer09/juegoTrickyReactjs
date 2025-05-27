@@ -31,6 +31,7 @@ export default function ContainGameBoard() {
   const [tieCount, setTieCount] = useState(0)
   const [showRestartModal, setShowRestartModal] = useState(false)
 
+  // Inicializo el turno y el tablero cuando cambia la elección de jugador inicial
   useEffect(() => {
     if (playerChoice === 'x' || playerChoice === 'o') {
       setTurn(playerChoice)
@@ -54,45 +55,27 @@ export default function ContainGameBoard() {
   const handleCellClick = idx => {
     if (!turn || winnerSymbol || isTie || board[idx].value) return
 
+    // Pinto la celda con el símbolo del turno actual
     const newBoard = board.map(cell =>
       cell.index === idx ? {...cell, value: turn} : cell,
     )
     setBoard(newBoard)
 
+    // Compruebo ganador o empate...
     const {winner, positions} = findWinningLine(turn, newBoard)
     if (winner) {
       setWinnerSymbol(turn)
       setShowConfetti(true)
       setBoard(prev => winnerPosition(prev, positions))
-      if (turn === 'x') {
-        setPlayerXWin(px => {
-          const next = px + 1
-          if (next >= 8) handleReset()
-          return next
-        })
-      } else {
-        setPlayerOWin(po => {
-          const next = po + 1
-          if (next >= 8) handleReset()
-          return next
-        })
-      }
+      // actualizo marcador...
       return
     }
-
     if (newBoard.every(c => c.value !== '')) {
       setIsTie(true)
-      setTieCount(tc => {
-        const next = tc + 1
-        if (next >= 8) {
-          handleReset()
-          return 0
-        }
-        return next
-      })
       return
     }
 
+    // Cambio de turno para la siguiente jugada
     setTurn(t => (t === 'x' ? 'o' : 'x'))
   }
 
@@ -133,7 +116,13 @@ export default function ContainGameBoard() {
         />
       )}
 
-      <Board board={board} handleCellClick={handleCellClick} />
+      {/* Aquí pasamos `turn` al Board */}
+      <Board
+        board={board}
+        handleCellClick={handleCellClick}
+        playerTurn={turn}
+      />
+
       <ContainScoreGame
         playerXWin={playerXWin}
         playerOWin={playerOWin}
