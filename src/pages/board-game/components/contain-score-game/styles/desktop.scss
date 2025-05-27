@@ -12,6 +12,13 @@
 
 @media screen and (min-width: 835px) {
 }
+
+@media screen and (max-width: 430px) {
+  .Contain-score-game {
+    width: 360px;
+  }
+}
+
 @media (max-width: 398px) {
   .Contain-score-game {
     width: 350px;

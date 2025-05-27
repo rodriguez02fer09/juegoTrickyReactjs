@@ -18,6 +18,11 @@
 @media screen and (min-width: 835px) {
 }
 
+@media screen and (max-width: 430px) {
+  .option-player {
+    width: 180px;
+  }
+}
 @media (max-width: 398px) {
   .option-player {
     width: 160px;

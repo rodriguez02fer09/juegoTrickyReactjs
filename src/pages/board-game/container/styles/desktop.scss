@@ -7,6 +7,17 @@
 
 @media screen and (min-width: 835px) {
 }
+
+@media screen and (max-width: 430px) {
+  .contain-game-board {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 @media (max-width: 398px) {
   .contain-game-board {
     width: 350px;

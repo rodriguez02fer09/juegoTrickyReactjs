@@ -2,3 +2,26 @@
   display: flex;
   flex-direction: column;
 }
+@media screen and (max-width: 398px) {
+  /* … estilos … */
+}
+
+/* dispositivos extra pequeños / pequeños: hasta 430px */
+@media screen and (max-width: 430px) {
+  .select-player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* tabletas y móviles medianos: de 399px a 834px */
+@media screen and (min-width: 399px) and (max-width: 834px) {
+  /* … estilos … */
+}
+
+/* escritorio grande: desde 835px en adelante */
+@media screen and (min-width: 835px) {
+  /* … estilos … */
+}

@@ -17,6 +17,16 @@
 
 @media screen and (min-width: 835px) {
 }
+@media screen and (max-width: 430px) {
+  .contain-restart-turn {
+    width: 360px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
 @media (max-width: 398px) {
   .contain-restart-turn {
     width: 350px;

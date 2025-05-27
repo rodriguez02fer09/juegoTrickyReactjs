@@ -221,6 +221,44 @@
   }
 }
 
+@media screen and (max-width: 430px) {
+  .button {
+    &--large-yellow {
+      width: 400px;
+    }
+    &--large-blue {
+      width: 400px;
+    }
+
+    &--small-yellow {
+      width: 146px;
+      height: 52px;
+      border-radius: 10px;
+      background: #f2b137;
+      box-shadow: 0px -4px 0px 0px #cc8b13 inset;
+      cursor: pointer;
+      &:hover {
+        background: #ffc860;
+        box-shadow: 0px -8px 0px 0px #cc8b13 inset;
+      }
+    }
+
+    // Estilos para botones pequeños azules
+    &--small-gray {
+      width: 136px;
+      height: 52px;
+      border-radius: 10px;
+      background: #a8bfc9;
+      box-shadow: 0px -4px 0px 0px #6b8997 inset;
+      cursor: pointer;
+      // Estilos para botones pequeños azules
+      &:hover {
+        background: #dbe8ed;
+        box-shadow: 0px -4px 0px 0px #6b8997 inset;
+      }
+    }
+  }
+}
 @media (max-width: 398px) {
   .button {
     &--large-yellow {

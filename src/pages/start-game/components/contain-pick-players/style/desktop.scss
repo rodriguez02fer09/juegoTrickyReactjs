@@ -43,6 +43,12 @@
 
 @media screen and (min-width: 835px) {
 }
+@media screen and (max-width: 430px) {
+  .containPickPlayers {
+    width: 400px;
+  }
+}
+
 @media (max-width: 398px) {
   .containPickPlayers {
     width: 350px;

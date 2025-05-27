@@ -47,6 +47,12 @@
 
 @media screen and (min-width: 835px) {
 }
+
+@media screen and (max-width: 430px) {
+  .score-game {
+    width: 110px;
+  }
+}
 @media (max-width: 398px) {
   .score-game {
     width: 100px;

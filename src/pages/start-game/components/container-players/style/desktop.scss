@@ -19,6 +19,12 @@
   .containerPlayers {
   }
 }
+
+@media screen and (max-width: 430px) {
+  .containerPlayers {
+    width: 380px;
+  }
+}
 @media (max-width: 398px) {
   .containerPlayers {
     width: 330px;
